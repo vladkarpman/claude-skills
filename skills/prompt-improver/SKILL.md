@@ -9,30 +9,24 @@ Help users create effective prompts using a 6-component framework. Work interact
 
 ## The Framework
 
-Every effective prompt has 6 components. Use this framework for analysis and construction:
+Every effective prompt has 6 components:
 
-| # | Component | Purpose | Question to Ask |
-|---|-----------|---------|-----------------|
-| 1 | **Persona** | Who should the AI be? | "What expert role should handle this task?" |
-| 2 | **Task** | What needs to be done? | "What specific action or output do you need?" |
-| 3 | **Steps** | How should it be done? | "What steps should be followed to complete this?" |
-| 4 | **Context** | What background/constraints? | "What context, rules, or limitations apply?" |
-| 5 | **Goal** | What does success look like? | "How will you know the output is correct?" |
-| 6 | **Format** | How should output be structured? | "What format do you want the response in?" |
+| # | Component | Purpose |
+|---|-----------|---------|
+| 1 | **Persona** | Who should the AI be? |
+| 2 | **Task** | What needs to be done? |
+| 3 | **Steps** | How should it be done? |
+| 4 | **Context** | What background/constraints? |
+| 5 | **Goal** | What does success look like? |
+| 6 | **Format** | How should output be structured? |
 
 ## Mode Selection
 
-When the user invokes this skill, determine the mode:
-
 **Improve Mode** — User provides an existing prompt to enhance
-- Trigger: User shares a prompt and asks to improve/optimize it
-- Action: Analyze against framework → Show gaps → Ask about missing parts → Generate improved version
 
 **Build Mode** — User wants to create a prompt from scratch
-- Trigger: User asks to "create", "write", or "build" a prompt, or says they need help making one
-- Action: Ask questions for each component → Build prompt step by step
 
-If unclear, ask: "Do you have a prompt you'd like to improve, or shall we build one from scratch?"
+If unclear, ask: *"Do you have a prompt you'd like to improve, or shall we build one from scratch?"*
 
 ---
 
@@ -40,57 +34,47 @@ If unclear, ask: "Do you have a prompt you'd like to improve, or shall we build 
 
 ### Step 1: Analyze Against Framework
 
-When the user provides a prompt, analyze each component and present using this format:
+Present your analysis using this format:
 
-## 📋 FRAMEWORK ANALYSIS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### 📋 Framework Analysis
 
-**Persona**   ❌  missing
-**Task**      ⚠️  *"[quoted from prompt]"* — too broad/vague
-**Steps**     ➖  not needed for this task
-**Context**   ❌  missing — [what's unclear]
-**Goal**      ❌  missing success criteria
-**Format**    ❌  missing output expectations
+| Component | Status | Notes |
+|:----------|:------:|:------|
+| Persona | ❌ | missing |
+| Task | 🟡 | too vague, needs specifics |
+| Steps | ➖ | not needed |
+| Context | ❌ | missing |
+| Goal | ❌ | missing |
+| Format | ❌ | missing |
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-`✅ Clear` · `⚠️ Vague` · `❌ Missing` · `➖ Not needed`
+**Legend:** ✅ Clear · 🟡 Vague · ❌ Missing · ➖ Not needed
+
+---
 
 ### Step 2: Assess Complexity
 
-Determine what components are actually needed:
+- **Simple** (factual questions) → Only need: Task + Format
+- **Medium** (content creation) → Need: Persona + Task + Context + Goal + Format
+- **Complex** (multi-step work) → Need all 6 components
 
-**Simple tasks** (factual questions, single actions):
-- Only need: Task + Format (maybe Goal)
-- Skip: Persona, Steps, detailed Context
+### Step 3: Fill Gaps
 
-**Medium tasks** (content creation, analysis):
-- Need: Persona + Task + Context + Goal + Format
-- Steps optional unless multi-part
+Ask ONE question at a time. Use this format:
 
-**Complex tasks** (multi-step processes, technical work):
-- Need all 6 components
-- Steps are essential
+---
 
-Mark unneeded components as ➖ in the analysis.
+### 📍 Question 1 of N
 
-### Step 3: Fill Gaps Step-by-Step
+## ❓ GOAL
 
-For components marked ⚠️ or ❌, ask ONE question at a time using this format:
+**What does success look like for this task?**
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📍 *Question 1 of N*
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+> 💡 *Based on [context], I'm guessing you want [suggestion].*
 
-## ❓ [COMPONENT NAME]
-
-**[Main question in bold]**
-
-> 💡 *[Context or suggestion based on what you know]*
-
-Choose one:
-  `a` **[Option A]** — [brief description]
-  `b` **[Option B]** — [brief description]
-  `c` **[Option C]** — [brief description]
+**Choose one:**
+- `a` **[Option A]** — description
+- `b` **[Option B]** — description
+- `c` **[Option C]** — description
 
 *Or describe in your own words.*
 
@@ -98,204 +82,131 @@ Choose one:
 
 **Guidelines:**
 - Wait for each answer before asking the next
-- Closely related aspects (e.g., "language + library" for code) can be grouped into one question
-- **Suggest answers when possible:** Use available context to propose a reasonable default
+- **Suggest answers** based on available context
 - **Priority order:** Task → Goal → Context → Persona → Format → Steps
-- Only ask about Steps if the task is complex enough to need them
 
 ### Step 4: Generate Improved Prompt
 
-Once you have enough information, generate the improved prompt using this format:
+---
 
-## ✨ IMPROVED PROMPT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### ✨ Improved Prompt
 
 ```
-You are [PERSONA - if needed].
+You are [PERSONA].
 
-[TASK - always include]
-
-**Steps:** (only for complex tasks)
-1. [Step 1]
-2. [Step 2]
-...
+[TASK]
 
 **Context:**
-- [Constraint or background info]
-- [Another constraint]
+- [constraint 1]
+- [constraint 2]
 
 **Goal:**
-[Success criteria - what good output looks like]
+[success criteria]
 
 **Format:**
-[Output structure requirements]
+[output structure]
 ```
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-*📋 Copy the prompt above and use it with any AI assistant.*
+> 📋 *Copy and use with any AI assistant.*
+
+---
 
 ### Step 5: Show What Changed
 
-After presenting the improved prompt, add this summary:
+---
 
-## 📝 WHAT CHANGED
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### 📝 What Changed
 
-✅ **Added:**
-   • [component 1] — [brief note]
-   • [component 2] — [brief note]
-   • [component 3] — [brief note]
+**✅ Added:**
+- [component] — [brief note]
+- [component] — [brief note]
 
-🔧 **Clarified:**
-   • [what changed] — [before → after]
+**🔧 Clarified:**
+- [what changed] — before → after
 
-💡 **Why this is better:**
-   [brief explanation of how this helps the AI]
+**💡 Why this is better:**
+[brief explanation]
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎉 **Done!** Your prompt is ready to use.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
+
+### 🎉 Done!
+
+Your prompt is ready to use.
 
 ---
 
 ## Mode 2: Build Mode
 
-Guide the user through creating a prompt by asking about each component. Adapt questions based on complexity.
+Ask ONE question at a time. Adapt based on complexity.
 
-### The Build Flow
+### Question Flow
 
-Ask ONE question at a time using the formatted question style. Wait for the user's response before proceeding.
+**❶ TASK** *(always ask)*
 
-**Question 1: TASK** (always ask)
+> **What do you need the AI to do?**
+>
+> Describe the task or output you're looking for.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📍 *Question 1 of N*
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+After this, assess complexity:
+- **Simple** → 2-3 questions (Task, Goal, Format)
+- **Medium** → 4-5 questions (add Persona, Context)
+- **Complex** → 5-6 questions (add Steps)
 
-## ❓ TASK
+**❷ GOAL** *(always ask)*
 
-**What do you need the AI to do?**
+> **What does a successful result look like?**
+>
+> 💡 *Based on your task, I'd suggest: [criteria]*
 
-Describe the task or output you're looking for.
+**❸ PERSONA** *(skip for simple)*
 
-*Examples: "Write a marketing email", "Debug this code", "Explain quantum computing"*
+> **What kind of expert should handle this?**
+>
+> 💡 *I'd suggest **[persona]** — [why]*
+>
+> Choose:
+> - `a` [Suggested persona]
+> - `b` [Alternative]
+> - `c` General assistant
 
----
+**❹ CONTEXT** *(skip for simple)*
 
-After this answer, assess complexity:
-- **Simple** → Ask only Goal and Format (2-3 questions total)
-- **Medium** → Ask Goal, Persona, Context, Format (4-5 questions total)
-- **Complex** → Ask all including Steps (5-6 questions total)
+> **Any context or constraints?**
+>
+> - Background info?
+> - Things to include/avoid?
+> - Tone or audience?
 
-Update the "Question X of N" indicator based on assessed complexity.
+**❺ STEPS** *(only for complex)*
 
-**Question 2: GOAL** (always ask)
+> **Should the AI follow specific steps?**
+>
+> 💡 *I'd suggest: [steps]*
+>
+> Choose:
+> - `a` Use suggested steps
+> - `b` Let AI decide
+> - `c` I'll specify custom steps
 
-## ❓ GOAL
+**❻ FORMAT** *(always ask)*
 
-**What does a successful result look like?**
-
-> 💡 *Based on your task, I'm thinking [suggested criteria].*
-
-How will you know the output is good?
-
----
-
-**Question 3: PERSONA** (skip for simple)
-
-## ❓ PERSONA
-
-**What kind of expert should handle this?**
-
-> 💡 *I'd suggest **[suggested persona]** based on your task.*
-
-Choose one:
-  `a` **[Suggested persona]** — [why it fits]
-  `b` **[Alternative]** — [different angle]
-  `c` **General assistant** — no specific expertise needed
-
-*Or specify a different expert role.*
-
----
-
-**Question 4: CONTEXT** (skip for simple)
-
-## ❓ CONTEXT
-
-**Any context or constraints?**
-
-Consider:
-- Background information the AI should know?
-- Things to include or avoid?
-- Tone, audience, or style requirements?
-
-*Skip if none — just say "none" or "skip".*
-
----
-
-**Question 5: STEPS** (only for complex tasks)
-
-## ❓ STEPS
-
-**Should the AI follow specific steps?**
-
-> 💡 *For this task, I'd suggest: [proposed steps]*
-
-Choose one:
-  `a` **Use suggested steps** — [brief summary]
-  `b` **Let AI decide** — no specific order needed
-  `c` **Custom steps** — I'll specify
-
----
-
-**Question 6: FORMAT** (always ask, can be brief)
-
-## ❓ FORMAT
-
-**How should the output be formatted?**
-
-Choose one:
-  `a` **Paragraphs** — flowing prose
-  `b` **Bullet points** — scannable list
-  `c` **Code** — with syntax highlighting
-  `d` **Table** — structured data
-  `e` **Mixed** — whatever fits best
-
----
-
-### Smart Skipping
-
-Don't ask unnecessary questions:
-- If user says "just a quick question" → Skip Persona, Context, Steps
-- If task is obviously simple → Skip to Format after Goal
-- If user seems impatient → Offer to generate with defaults and refine after
+> **How should the output be formatted?**
+>
+> - `a` Paragraphs
+> - `b` Bullet points
+> - `c` Code
+> - `d` Table
+> - `e` Mixed
 
 ### Generate the Prompt
 
-After gathering components, generate the prompt using the same format as Improve Mode (Step 4), followed by the completion celebration.
-
----
-
-## Output Options
-
-| Option | Description |
-|--------|-------------|
-| **Single** (default) | One optimized prompt |
-| **Variations** | 2-3 versions: concise, structured (XML), conversational |
-| **Detailed** | Prompt + explanation of each component |
-
----
-
-## Examples
-
-See [examples.md](examples.md) for before/after transformations across coding, writing, analysis, and creative domains.
+Use the same format as Improve Mode (Step 4), then show the completion message.
 
 ---
 
 ## Final Notes
 
-- Always preserve the user's original intent
+- Preserve the user's original intent
 - Don't over-engineer simple requests
-- Ask clarifying questions rather than assuming
-- If a prompt is already good, say so — don't change for the sake of change
+- If a prompt is already good, say so
 - Match complexity of improvement to complexity of task
