@@ -1,0 +1,13 @@
+{
+  "name": "claude-skills",
+  "version": "1.0.0",
+  "description": "A collection of reusable skills for Claude that enhance its capabilities for specific tasks",
+  "author": {
+    "name": "Vladislav Karpman",
+    "url": "https://github.com/vladkarpman"
+  },
+  "homepage": "https://github.com/vladkarpman/claude-skills",
+  "repository": "https://github.com/vladkarpman/claude-skills",
+  "license": "MIT",
+  "keywords": ["skills", "prompts", "prompt-engineering", "claude", "ai"]
+}

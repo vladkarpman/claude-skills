@@ -74,4 +74,4 @@ Format:
 
 ## Installation
 
-See the [main README](../README.md) for installation instructions.
+See the [main README](../../README.md) for installation instructions.
