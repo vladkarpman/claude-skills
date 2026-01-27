@@ -29,3 +29,6 @@ build/
 
 # Logs
 *.log
+
+# Task prompts (not part of repo)
+claude-code-prompt.md
