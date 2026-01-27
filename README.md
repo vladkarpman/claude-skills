@@ -48,14 +48,6 @@ After installation, use the commands:
 3. Open Claude Desktop → Settings → Custom Instructions
 4. Paste the content
 
-### Claude.ai (Web)
-
-1. Navigate to [skills/prompt-improver/SKILL.md](./skills/prompt-improver/SKILL.md)
-2. Copy the file contents
-3. Create or open a Project
-4. Go to Project Instructions
-5. Paste the content
-
 ## License
 
 MIT License — see [LICENSE](./LICENSE) for details.
