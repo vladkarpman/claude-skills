@@ -1,20 +1,11 @@
 ---
 name: prompt-improver
-description: Build or improve prompts using the proven 6-component framework (Persona, Task, Steps, Context, Goal, Format). Works interactively — analyzes gaps and guides you through creating effective prompts that get better AI results.
+description: Use when user asks to improve, optimize, or create a prompt, mentions "prompt engineering", or wants feedback on a prompt they wrote.
 ---
 
 # Prompt Improver
 
-You are an expert prompt engineer who helps users create effective prompts using a proven framework. You work interactively — either improving an existing prompt or building one from scratch.
-
-## When to Use This Skill
-
-Activate when the user:
-- Says "improve this prompt", "optimize this prompt", "make this prompt better"
-- Asks for help writing or creating a prompt
-- Wants to build a prompt from scratch
-- Mentions "prompt engineering" or "prompt optimization"
-- Provides a prompt and asks for feedback
+Help users create effective prompts using a 6-component framework. Work interactively — either improving an existing prompt or building one from scratch.
 
 ## The Framework
 
@@ -49,26 +40,24 @@ If unclear, ask: "Do you have a prompt you'd like to improve, or shall we build 
 
 ### Step 1: Analyze Against Framework
 
-When the user provides a prompt, analyze each component:
+When the user provides a prompt, analyze each component and present:
 
 ```
-## Framework Analysis
+┌─────────────────────────────────────────────────────────────┐
+│  📋 FRAMEWORK ANALYSIS                                      │
+├─────────────┬────────┬──────────────────────────────────────┤
+│ Component   │ Status │ Found                                │
+├─────────────┼────────┼──────────────────────────────────────┤
+│ Persona     │ ✅/⚠️/❌ │ [what you found or "missing"]        │
+│ Task        │ ✅/⚠️/❌ │ [what you found or "missing"]        │
+│ Steps       │ ✅/⚠️/➖ │ [found, "missing", or "not needed"]  │
+│ Context     │ ✅/⚠️/❌ │ [what you found or "missing"]        │
+│ Goal        │ ✅/⚠️/❌ │ [what you found or "missing"]        │
+│ Format      │ ✅/⚠️/❌ │ [what you found or "missing"]        │
+└─────────────┴────────┴──────────────────────────────────────┘
 
-| Component | Status | Found |
-|-----------|--------|-------|
-| Persona   | ✅/⚠️/❌ | [what you found or "missing"] |
-| Task      | ✅/⚠️/❌ | [what you found or "missing"] |
-| Steps     | ✅/⚠️/❌/➖ | [what you found, "missing", or "not needed"] |
-| Context   | ✅/⚠️/❌ | [what you found or "missing"] |
-| Goal      | ✅/⚠️/❌ | [what you found or "missing"] |
-| Format    | ✅/⚠️/❌ | [what you found or "missing"] |
+Legend: ✅ Clear  ⚠️ Vague  ❌ Missing  ➖ Not needed
 ```
-
-Status meanings:
-- ✅ Present and clear
-- ⚠️ Present but vague or incomplete
-- ❌ Missing (and needed)
-- ➖ Not needed for this task (skip)
 
 ### Step 2: Assess Complexity
 
@@ -90,7 +79,9 @@ Mark unneeded components as ➖ in the analysis.
 
 ### Step 3: Fill Gaps Step-by-Step
 
-For components marked ⚠️ or ❌, ask ONE question at a time. Wait for each answer before asking the next.
+For components marked ⚠️ or ❌, ask ONE question at a time. Wait for each answer before asking the next. Closely related aspects (e.g., "language + library" for code) can be grouped into one question.
+
+**Suggest answers when possible:** Use available context to propose a reasonable default. Example: "What programming language? Based on your task, Python with `smtplib` would work well — or did you have something else in mind?"
 
 **Priority order:** Task → Goal → Context → Persona → Format → Steps
 
@@ -109,25 +100,43 @@ Only ask about Steps if the task is complex enough to need them.
 Once you have enough information, generate the improved prompt. Only include components that are relevant:
 
 ```
-[PERSONA - if needed]
+┌─────────────────────────────────────────────────────────────┐
+│  ✨ IMPROVED PROMPT                                         │
+└─────────────────────────────────────────────────────────────┘
+
+You are [PERSONA - if needed].
 
 [TASK - always include]
 
-[STEPS - only for complex/multi-part tasks]
+**Steps:** (only for complex tasks)
+1. [Step 1]
+2. [Step 2]
+...
 
-[CONTEXT/CONSTRAINTS - if there are relevant constraints]
+**Context:**
+- [Constraint or background info]
+- [Another constraint]
 
-[GOAL - if success criteria matter]
+**Goal:**
+[Success criteria - what good output looks like]
 
-[FORMAT - if specific structure needed]
+**Format:**
+[Output structure requirements]
 ```
 
 ### Step 5: Show What Changed
 
-After presenting the improved prompt, briefly explain:
-- What components were added
-- What was clarified or strengthened
-- Why these changes help
+After presenting the improved prompt, add a brief summary:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  📝 WHAT CHANGED                                            │
+├─────────────────────────────────────────────────────────────┤
+│  + Added: [components that were missing]                    │
+│  ↑ Clarified: [components that were vague]                  │
+│  → Why: [brief explanation of how this helps]               │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -137,34 +146,58 @@ Guide the user through creating a prompt by asking about each component. Adapt q
 
 ### The Build Flow
 
-Ask ONE question at a time. Wait for the user's response before proceeding.
+Ask ONE question at a time. Wait for the user's response before proceeding. Closely related aspects can be grouped. When possible, suggest an answer based on context you already have.
 
-**Question 1: Task** (always ask)
-> "What do you need the AI to do? Describe the task or output you're looking for."
-
+```
+┌──────────────────────────────────────────────────────────┐
+│  ❶ TASK (always ask)                                     │
+│                                                          │
+│  "What do you need the AI to do?                         │
+│   Describe the task or output you're looking for."       │
+└──────────────────────────────────────────────────────────┘
+```
 After this answer, assess complexity:
-- Simple → Ask only Goal and Format
-- Medium → Ask Goal, Persona, Context, Format
-- Complex → Ask all including Steps
+- **Simple** → Ask only Goal and Format
+- **Medium** → Ask Goal, Persona, Context, Format
+- **Complex** → Ask all including Steps
 
-**Question 2: Goal** (always ask)
-> "What does a successful result look like? How will you know the output is good?"
+```
+┌──────────────────────────────────────────────────────────┐
+│  ❷ GOAL (always ask)                                     │
+│                                                          │
+│  "What does a successful result look like?               │
+│   How will you know the output is good?"                 │
+└──────────────────────────────────────────────────────────┘
 
-**Question 3: Persona** (skip for simple tasks)
-> "What kind of expert should handle this? (e.g., 'senior developer', 'marketing strategist')
-> Or I can suggest one based on your task."
+┌──────────────────────────────────────────────────────────┐
+│  ❸ PERSONA (skip for simple)                             │
+│                                                          │
+│  "What kind of expert should handle this?                │
+│   I'd suggest [X] based on your task — sound good?"      │
+└──────────────────────────────────────────────────────────┘
 
-**Question 4: Context** (skip for simple tasks)
-> "Any context or constraints?
-> - Background information?
-> - Things to include or avoid?"
+┌──────────────────────────────────────────────────────────┐
+│  ❹ CONTEXT (skip for simple)                             │
+│                                                          │
+│  "Any context or constraints?                            │
+│   • Background information?                              │
+│   • Things to include or avoid?"                         │
+└──────────────────────────────────────────────────────────┘
 
-**Question 5: Steps** (only for complex multi-part tasks)
-> "This seems like a multi-step task. Should the AI follow specific steps?
-> If yes, what are they? Or should it figure out the approach?"
+┌──────────────────────────────────────────────────────────┐
+│  ❺ STEPS (only for complex tasks)                        │
+│                                                          │
+│  "Should the AI follow specific steps?                   │
+│   If yes, what are they? Or should it decide?"           │
+└──────────────────────────────────────────────────────────┘
 
-**Question 6: Format** (always ask, can be brief)
-> "How should the output be formatted? (e.g., paragraphs, bullet points, code block, table)"
+┌──────────────────────────────────────────────────────────┐
+│  ❻ FORMAT (always ask, can be brief)                     │
+│                                                          │
+│  "How should the output be formatted?                    │
+│   (e.g., paragraphs, bullet points, code, table)"        │
+└──────────────────────────────────────────────────────────┘
+```
 
 ### Smart Skipping
 
@@ -181,167 +214,17 @@ After gathering components, generate the prompt. Only include relevant sections 
 
 ## Output Options
 
-The user can request different output styles:
-
-**Single** (default) — One optimized prompt
-**Variations** — 2-3 versions with different styles:
-  - Concise: Minimal, direct
-  - Structured: XML tags, explicit sections
-  - Conversational: Natural flow
-
-**Detailed** — Single prompt + explanation of each component
-
----
-
-## Adapting to Complexity
-
-**Simple tasks** (1-2 sentences):
-- Don't over-engineer
-- Persona + Task + Format may be enough
-- Skip Steps if straightforward
-
-**Medium tasks** (paragraph-length):
-- Include all 6 components
-- Add Context and Goal
-
-**Complex tasks** (multi-part):
-- Full framework with detailed Steps
-- Use XML tags for structure
-- Include examples of good/bad output
+| Option | Description |
+|--------|-------------|
+| **Single** (default) | One optimized prompt |
+| **Variations** | 2-3 versions: concise, structured (XML), conversational |
+| **Detailed** | Prompt + explanation of each component |
 
 ---
 
 ## Examples
 
-### Example 1: Improve Mode — Vague Prompt
-
-**User provides:**
-> "write code to process data"
-
-**Framework Analysis:**
-
-| Component | Status | Found |
-|-----------|--------|-------|
-| Persona   | ❌ | missing |
-| Task      | ⚠️ | "process data" - vague |
-| Steps     | ❌ | missing |
-| Context   | ❌ | missing - what data? what language? |
-| Goal      | ❌ | missing - what's the expected result? |
-| Format    | ❌ | missing |
-
-**Questions to ask:**
-1. "What kind of data are you processing? (CSV, JSON, database?)"
-2. "What should happen to the data? (clean, transform, analyze?)"
-3. "What programming language?"
-4. "What does success look like?"
-
-**After gathering answers, improved prompt:**
-```
-You are a senior Python developer experienced with data processing.
-
-Write a Python script that processes a CSV file of customer orders.
-
-Steps:
-1. Read the CSV file from a given path
-2. Clean the data (remove duplicates, handle missing values)
-3. Calculate total revenue per customer
-4. Export results to a new CSV
-
-Context:
-- CSV has columns: order_id, customer_id, product, quantity, price, date
-- Handle files up to 1GB efficiently
-- Use pandas library
-
-Goal:
-- Script runs without errors
-- Handles edge cases (empty file, malformed rows)
-- Outputs clean, sorted CSV
-
-Format:
-- Complete Python script with comments
-- Include example usage at the bottom
-```
-
----
-
-### Example 2: Build Mode — From Scratch
-
-**User:** "I need help creating a prompt"
-
-**Claude:** "What do you need the AI to do?"
-
-**User:** "Generate product descriptions for an e-commerce site"
-
-**Claude:** "What does a successful product description look like? How will you know it's good?"
-
-**User:** "It should be engaging, highlight benefits, and be 50-100 words"
-
-**Claude:** "What kind of expert should handle this? I'd suggest a copywriter — does that work?"
-
-**User:** "Yes, a senior e-commerce copywriter"
-
-**Claude:** "Any context or constraints? Brand voice, things to avoid, target audience?"
-
-**User:** "Luxury brand, avoid clichés, target affluent millennials"
-
-**Claude:** "What format? Just the description, or with additional elements?"
-
-**User:** "Description plus 3 bullet points of features"
-
-**Generated prompt:**
-```
-You are a senior e-commerce copywriter specializing in luxury brands.
-
-Write a product description for the item I provide.
-
-Context:
-- Brand voice: sophisticated, understated elegance
-- Target audience: affluent millennials (28-40)
-- Avoid: clichés, hyperbole, generic phrases like "high-quality"
-
-Goal:
-- Engaging copy that highlights benefits over features
-- Creates desire without being pushy
-- 50-100 words for description
-
-Format:
-<description>
-[50-100 word product description]
-</description>
-
-<features>
-- [Feature 1 with benefit]
-- [Feature 2 with benefit]
-- [Feature 3 with benefit]
-</features>
-```
-
----
-
-### Example 3: Already Good Prompt
-
-**User provides a well-structured prompt**
-
-**Framework Analysis:**
-
-| Component | Status | Found |
-|-----------|--------|-------|
-| Persona   | ✅ | "You are a technical writer" |
-| Task      | ✅ | "Write API documentation" |
-| Steps     | ✅ | Clear 4-step process |
-| Context   | ✅ | Audience, style guide |
-| Goal      | ⚠️ | Implicit but not explicit |
-| Format    | ✅ | Markdown with sections |
-
-**Response:**
-> "This is a solid prompt! Only minor suggestion: add explicit success criteria.
->
-> Consider adding:
-> ```
-> Goal: Documentation should be clear enough that a junior developer can integrate the API without additional help.
-> ```
->
-> Otherwise, this prompt has all the key components and should work well."
+See [examples.md](examples.md) for before/after transformations across coding, writing, analysis, and creative domains.
 
 ---
 
