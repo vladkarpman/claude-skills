@@ -56,15 +56,6 @@ After installation, use the commands:
 4. Go to Project Instructions
 5. Paste the content
 
-## Creating Your Own Skills
-
-Use the `skills/_template/` folder as a starting point:
-
-1. Copy `skills/_template/SKILL.md` to `skills/your-skill-name/SKILL.md`
-2. Fill in the name, description, and instructions
-3. Test your skill
-4. Submit a PR to share it
-
 ## License
 
 MIT License — see [LICENSE](./LICENSE) for details.
