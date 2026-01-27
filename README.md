@@ -10,15 +10,36 @@ A collection of reusable skills for Claude that enhance its capabilities for spe
 |-------|-------------|
 | [prompt-improver](./skills/prompt-improver/) | Build or improve prompts using the 6-component framework (Persona, Task, Steps, Context, Goal, Format) |
 
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `/improve-prompt` | Analyze and improve an existing prompt |
+| `/build-prompt` | Build a new prompt from scratch |
+
 ## Installation
 
 ### Claude Code (CLI)
 
+**Option 1: Via Marketplace (recommended)**
+```bash
+# Add the marketplace (one time)
+claude plugin marketplace add vladkarpman/claude-plugins
+
+# Install the plugin
+claude plugin install claude-skills
+```
+
+**Option 2: Direct install**
 ```bash
 claude plugin add vladkarpman/claude-skills
 ```
 
-After installation, skills are available automatically. Invoke directly with `/claude-skills:prompt-improver` or let Claude use them when relevant.
+After installation, use the commands:
+```bash
+/improve-prompt write code to process data
+/build-prompt
+```
 
 ### Claude Desktop / Claude Cowork
 
@@ -43,21 +64,6 @@ Use the `skills/_template/` folder as a starting point:
 2. Fill in the name, description, and instructions
 3. Test your skill
 4. Submit a PR to share it
-
-## Skill Format
-
-Each skill is a markdown file with YAML frontmatter:
-
-```yaml
----
-name: skill-name
-description: What this skill does and when Claude should use it.
----
-
-# Skill Name
-
-Instructions for Claude...
-```
 
 ## License
 

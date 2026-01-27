@@ -9,5 +9,9 @@
   "homepage": "https://github.com/vladkarpman/claude-skills",
   "repository": "https://github.com/vladkarpman/claude-skills",
   "license": "MIT",
-  "keywords": ["skills", "prompts", "prompt-engineering", "claude", "ai"]
+  "keywords": ["skills", "prompts", "prompt-engineering", "claude", "ai"],
+  "commands": [
+    "./commands/improve-prompt.md",
+    "./commands/build-prompt.md"
+  ]
 }
