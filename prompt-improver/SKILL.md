@@ -58,7 +58,7 @@ When the user provides a prompt, analyze each component:
 |-----------|--------|-------|
 | Persona   | ✅/⚠️/❌ | [what you found or "missing"] |
 | Task      | ✅/⚠️/❌ | [what you found or "missing"] |
-| Steps     | ✅/⚠️/❌ | [what you found or "missing"] |
+| Steps     | ✅/⚠️/❌/➖ | [what you found, "missing", or "not needed"] |
 | Context   | ✅/⚠️/❌ | [what you found or "missing"] |
 | Goal      | ✅/⚠️/❌ | [what you found or "missing"] |
 | Format    | ✅/⚠️/❌ | [what you found or "missing"] |
@@ -67,40 +67,62 @@ When the user provides a prompt, analyze each component:
 Status meanings:
 - ✅ Present and clear
 - ⚠️ Present but vague or incomplete
-- ❌ Missing
+- ❌ Missing (and needed)
+- ➖ Not needed for this task (skip)
 
-### Step 2: Ask About Gaps
+### Step 2: Assess Complexity
 
-For components marked ⚠️ or ❌, ask targeted questions. Ask ONE question at a time, prioritizing the most important gaps first.
+Determine what components are actually needed:
 
-**Priority order:** Task → Goal → Persona → Context → Steps → Format
+**Simple tasks** (factual questions, single actions):
+- Only need: Task + Format (maybe Goal)
+- Skip: Persona, Steps, detailed Context
 
-Example:
-> "I see you want to [task]. To strengthen this prompt:
-> - What does a successful output look like? (Goal is missing)"
+**Medium tasks** (content creation, analysis):
+- Need: Persona + Task + Context + Goal + Format
+- Steps optional unless multi-part
 
-### Step 3: Generate Improved Prompt
+**Complex tasks** (multi-step processes, technical work):
+- Need all 6 components
+- Steps are essential
 
-Once you have enough information, generate the improved prompt using this structure:
+Mark unneeded components as ➖ in the analysis.
+
+### Step 3: Fill Gaps Step-by-Step
+
+For components marked ⚠️ or ❌, ask ONE question at a time. Wait for each answer before asking the next.
+
+**Priority order:** Task → Goal → Context → Persona → Format → Steps
+
+Only ask about Steps if the task is complex enough to need them.
+
+**Flow:**
+1. Show the Framework Analysis
+2. Ask first question about highest-priority gap
+3. Wait for answer
+4. Ask next question (if needed)
+5. Continue until gaps are filled
+6. Generate improved prompt
+
+### Step 4: Generate Improved Prompt
+
+Once you have enough information, generate the improved prompt. Only include components that are relevant:
 
 ```
-[PERSONA - who the AI should be]
+[PERSONA - if needed]
 
-[TASK - clear statement of what to do]
+[TASK - always include]
 
-[STEPS - numbered steps to follow, if applicable]
+[STEPS - only for complex/multi-part tasks]
 
-[CONTEXT/CONSTRAINTS]
-- Relevant background
-- What to include
-- What to avoid
+[CONTEXT/CONSTRAINTS - if there are relevant constraints]
 
-[GOAL - success criteria]
+[GOAL - if success criteria matter]
 
-[FORMAT - output structure]
+[FORMAT - if specific structure needed]
 ```
 
-### Step 4: Show What Changed
+### Step 5: Show What Changed
 
 After presenting the improved prompt, briefly explain:
 - What components were added
@@ -111,41 +133,49 @@ After presenting the improved prompt, briefly explain:
 
 ## Mode 2: Build Mode
 
-Guide the user through creating a prompt by asking about each component in order.
+Guide the user through creating a prompt by asking about each component. Adapt questions based on complexity.
 
 ### The Build Flow
 
 Ask ONE question at a time. Wait for the user's response before proceeding.
 
-**Question 1: Task**
+**Question 1: Task** (always ask)
 > "What do you need the AI to do? Describe the task or output you're looking for."
 
-**Question 2: Goal**
+After this answer, assess complexity:
+- Simple → Ask only Goal and Format
+- Medium → Ask Goal, Persona, Context, Format
+- Complex → Ask all including Steps
+
+**Question 2: Goal** (always ask)
 > "What does a successful result look like? How will you know the output is good?"
 
-**Question 3: Persona**
-> "What kind of expert should handle this? (e.g., 'senior developer', 'marketing strategist', 'data analyst')
-> Or should I suggest one based on your task?"
+**Question 3: Persona** (skip for simple tasks)
+> "What kind of expert should handle this? (e.g., 'senior developer', 'marketing strategist')
+> Or I can suggest one based on your task."
 
-**Question 4: Context**
-> "What context or constraints should the AI know about?
-> - Any background information?
-> - Things to include or avoid?
-> - Limitations or rules?"
+**Question 4: Context** (skip for simple tasks)
+> "Any context or constraints?
+> - Background information?
+> - Things to include or avoid?"
 
-**Question 5: Steps** (if task is complex)
-> "Should the AI follow specific steps? If yes, what are they?
-> Or would you like it to figure out the approach?"
+**Question 5: Steps** (only for complex multi-part tasks)
+> "This seems like a multi-step task. Should the AI follow specific steps?
+> If yes, what are they? Or should it figure out the approach?"
 
-**Question 6: Format**
-> "How should the output be formatted?
-> - Plain text / bullet points / numbered list?
-> - Code block / table / sections?
-> - Any specific structure?"
+**Question 6: Format** (always ask, can be brief)
+> "How should the output be formatted? (e.g., paragraphs, bullet points, code block, table)"
+
+### Smart Skipping
+
+Don't ask unnecessary questions:
+- If user says "just a quick question" → Skip Persona, Context, Steps
+- If task is obviously simple → Skip to Format after Goal
+- If user seems impatient → Offer to generate with defaults and refine after
 
 ### Generate the Prompt
 
-After gathering all components, generate the complete prompt and present it.
+After gathering components, generate the prompt. Only include relevant sections — don't pad simple prompts with unnecessary structure.
 
 ---
 
