@@ -141,14 +141,19 @@ After presenting the improved prompt, add this summary:
 ## 📝 WHAT CHANGED
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-| | |
-|---|---|
-| ✅ **Added** | [components that were missing] |
-| 🔧 **Clarified** | [components that were vague — what changed] |
-| 💡 **Why better** | [brief explanation of how this helps the AI] |
+✅ **Added:**
+   • [component 1] — [brief note]
+   • [component 2] — [brief note]
+   • [component 3] — [brief note]
+
+🔧 **Clarified:**
+   • [what changed] — [before → after]
+
+💡 **Why this is better:**
+   [brief explanation of how this helps the AI]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎉 *Done! Your prompt is ready to use.*
+🎉 **Done!** Your prompt is ready to use.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ---
