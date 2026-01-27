@@ -43,10 +43,11 @@ After installation, use the commands:
 
 ### Claude Desktop / Claude Cowork
 
-1. Navigate to [skills/prompt-improver/SKILL.md](./skills/prompt-improver/SKILL.md)
-2. Copy the file contents (everything including the frontmatter)
-3. Open Claude Desktop → Capabilities → Add Skill
-4. Paste the content and save
+1. Download [SKILL.md](./skills/prompt-improver/SKILL.md)
+2. Open Claude Desktop → Settings → **Capabilities**
+3. Scroll down to **Skills** section → click **+ Add**
+4. Select **"Upload a skill"**
+5. Choose the downloaded SKILL.md file
 
 ## License
 
