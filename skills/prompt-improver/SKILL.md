@@ -40,24 +40,20 @@ If unclear, ask: "Do you have a prompt you'd like to improve, or shall we build 
 
 ### Step 1: Analyze Against Framework
 
-When the user provides a prompt, analyze each component and present:
+When the user provides a prompt, analyze each component and present using this format:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  📋 FRAMEWORK ANALYSIS                                      │
-├─────────────┬────────┬──────────────────────────────────────┤
-│ Component   │ Status │ Found                                │
-├─────────────┼────────┼──────────────────────────────────────┤
-│ Persona     │ ✅/⚠️/❌ │ [what you found or "missing"]        │
-│ Task        │ ✅/⚠️/❌ │ [what you found or "missing"]        │
-│ Steps       │ ✅/⚠️/➖ │ [found, "missing", or "not needed"]  │
-│ Context     │ ✅/⚠️/❌ │ [what you found or "missing"]        │
-│ Goal        │ ✅/⚠️/❌ │ [what you found or "missing"]        │
-│ Format      │ ✅/⚠️/❌ │ [what you found or "missing"]        │
-└─────────────┴────────┴──────────────────────────────────────┘
+## 📋 FRAMEWORK ANALYSIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Legend: ✅ Clear  ⚠️ Vague  ❌ Missing  ➖ Not needed
-```
+**Persona**   ❌  missing
+**Task**      ⚠️  *"[quoted from prompt]"* — too broad/vague
+**Steps**     ➖  not needed for this task
+**Context**   ❌  missing — [what's unclear]
+**Goal**      ❌  missing success criteria
+**Format**    ❌  missing output expectations
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+`✅ Clear` · `⚠️ Vague` · `❌ Missing` · `➖ Not needed`
 
 ### Step 2: Assess Complexity
 
@@ -79,31 +75,42 @@ Mark unneeded components as ➖ in the analysis.
 
 ### Step 3: Fill Gaps Step-by-Step
 
-For components marked ⚠️ or ❌, ask ONE question at a time. Wait for each answer before asking the next. Closely related aspects (e.g., "language + library" for code) can be grouped into one question.
+For components marked ⚠️ or ❌, ask ONE question at a time using this format:
 
-**Suggest answers when possible:** Use available context to propose a reasonable default. Example: "What programming language? Based on your task, Python with `smtplib` would work well — or did you have something else in mind?"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📍 *Question 1 of N*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**Priority order:** Task → Goal → Context → Persona → Format → Steps
+## ❓ [COMPONENT NAME]
 
-Only ask about Steps if the task is complex enough to need them.
+**[Main question in bold]**
 
-**Flow:**
-1. Show the Framework Analysis
-2. Ask first question about highest-priority gap
-3. Wait for answer
-4. Ask next question (if needed)
-5. Continue until gaps are filled
-6. Generate improved prompt
+> 💡 *[Context or suggestion based on what you know]*
+
+Choose one:
+  `a` **[Option A]** — [brief description]
+  `b` **[Option B]** — [brief description]
+  `c` **[Option C]** — [brief description]
+
+*Or describe in your own words.*
+
+---
+
+**Guidelines:**
+- Wait for each answer before asking the next
+- Closely related aspects (e.g., "language + library" for code) can be grouped into one question
+- **Suggest answers when possible:** Use available context to propose a reasonable default
+- **Priority order:** Task → Goal → Context → Persona → Format → Steps
+- Only ask about Steps if the task is complex enough to need them
 
 ### Step 4: Generate Improved Prompt
 
-Once you have enough information, generate the improved prompt. Only include components that are relevant:
+Once you have enough information, generate the improved prompt using this format:
+
+## ✨ IMPROVED PROMPT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  ✨ IMPROVED PROMPT                                         │
-└─────────────────────────────────────────────────────────────┘
-
 You are [PERSONA - if needed].
 
 [TASK - always include]
@@ -124,19 +131,25 @@ You are [PERSONA - if needed].
 [Output structure requirements]
 ```
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*📋 Copy the prompt above and use it with any AI assistant.*
+
 ### Step 5: Show What Changed
 
-After presenting the improved prompt, add a brief summary:
+After presenting the improved prompt, add this summary:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  📝 WHAT CHANGED                                            │
-├─────────────────────────────────────────────────────────────┤
-│  + Added: [components that were missing]                    │
-│  ↑ Clarified: [components that were vague]                  │
-│  → Why: [brief explanation of how this helps]               │
-└─────────────────────────────────────────────────────────────┘
-```
+## 📝 WHAT CHANGED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+| | |
+|---|---|
+| ✅ **Added** | [components that were missing] |
+| 🔧 **Clarified** | [components that were vague — what changed] |
+| 💡 **Why better** | [brief explanation of how this helps the AI] |
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎉 *Done! Your prompt is ready to use.*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ---
 
@@ -146,58 +159,104 @@ Guide the user through creating a prompt by asking about each component. Adapt q
 
 ### The Build Flow
 
-Ask ONE question at a time. Wait for the user's response before proceeding. Closely related aspects can be grouped. When possible, suggest an answer based on context you already have.
+Ask ONE question at a time using the formatted question style. Wait for the user's response before proceeding.
 
-```
-┌──────────────────────────────────────────────────────────┐
-│  ❶ TASK (always ask)                                     │
-│                                                          │
-│  "What do you need the AI to do?                         │
-│   Describe the task or output you're looking for."       │
-└──────────────────────────────────────────────────────────┘
-```
+**Question 1: TASK** (always ask)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📍 *Question 1 of N*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## ❓ TASK
+
+**What do you need the AI to do?**
+
+Describe the task or output you're looking for.
+
+*Examples: "Write a marketing email", "Debug this code", "Explain quantum computing"*
+
+---
+
 After this answer, assess complexity:
-- **Simple** → Ask only Goal and Format
-- **Medium** → Ask Goal, Persona, Context, Format
-- **Complex** → Ask all including Steps
+- **Simple** → Ask only Goal and Format (2-3 questions total)
+- **Medium** → Ask Goal, Persona, Context, Format (4-5 questions total)
+- **Complex** → Ask all including Steps (5-6 questions total)
 
-```
-┌──────────────────────────────────────────────────────────┐
-│  ❷ GOAL (always ask)                                     │
-│                                                          │
-│  "What does a successful result look like?               │
-│   How will you know the output is good?"                 │
-└──────────────────────────────────────────────────────────┘
+Update the "Question X of N" indicator based on assessed complexity.
 
-┌──────────────────────────────────────────────────────────┐
-│  ❸ PERSONA (skip for simple)                             │
-│                                                          │
-│  "What kind of expert should handle this?                │
-│   I'd suggest [X] based on your task — sound good?"      │
-└──────────────────────────────────────────────────────────┘
+**Question 2: GOAL** (always ask)
 
-┌──────────────────────────────────────────────────────────┐
-│  ❹ CONTEXT (skip for simple)                             │
-│                                                          │
-│  "Any context or constraints?                            │
-│   • Background information?                              │
-│   • Things to include or avoid?"                         │
-└──────────────────────────────────────────────────────────┘
+## ❓ GOAL
 
-┌──────────────────────────────────────────────────────────┐
-│  ❺ STEPS (only for complex tasks)                        │
-│                                                          │
-│  "Should the AI follow specific steps?                   │
-│   If yes, what are they? Or should it decide?"           │
-└──────────────────────────────────────────────────────────┘
+**What does a successful result look like?**
 
-┌──────────────────────────────────────────────────────────┐
-│  ❻ FORMAT (always ask, can be brief)                     │
-│                                                          │
-│  "How should the output be formatted?                    │
-│   (e.g., paragraphs, bullet points, code, table)"        │
-└──────────────────────────────────────────────────────────┘
-```
+> 💡 *Based on your task, I'm thinking [suggested criteria].*
+
+How will you know the output is good?
+
+---
+
+**Question 3: PERSONA** (skip for simple)
+
+## ❓ PERSONA
+
+**What kind of expert should handle this?**
+
+> 💡 *I'd suggest **[suggested persona]** based on your task.*
+
+Choose one:
+  `a` **[Suggested persona]** — [why it fits]
+  `b` **[Alternative]** — [different angle]
+  `c` **General assistant** — no specific expertise needed
+
+*Or specify a different expert role.*
+
+---
+
+**Question 4: CONTEXT** (skip for simple)
+
+## ❓ CONTEXT
+
+**Any context or constraints?**
+
+Consider:
+- Background information the AI should know?
+- Things to include or avoid?
+- Tone, audience, or style requirements?
+
+*Skip if none — just say "none" or "skip".*
+
+---
+
+**Question 5: STEPS** (only for complex tasks)
+
+## ❓ STEPS
+
+**Should the AI follow specific steps?**
+
+> 💡 *For this task, I'd suggest: [proposed steps]*
+
+Choose one:
+  `a` **Use suggested steps** — [brief summary]
+  `b` **Let AI decide** — no specific order needed
+  `c` **Custom steps** — I'll specify
+
+---
+
+**Question 6: FORMAT** (always ask, can be brief)
+
+## ❓ FORMAT
+
+**How should the output be formatted?**
+
+Choose one:
+  `a` **Paragraphs** — flowing prose
+  `b` **Bullet points** — scannable list
+  `c` **Code** — with syntax highlighting
+  `d` **Table** — structured data
+  `e` **Mixed** — whatever fits best
+
+---
 
 ### Smart Skipping
 
@@ -208,7 +267,7 @@ Don't ask unnecessary questions:
 
 ### Generate the Prompt
 
-After gathering components, generate the prompt. Only include relevant sections — don't pad simple prompts with unnecessary structure.
+After gathering components, generate the prompt using the same format as Improve Mode (Step 4), followed by the completion celebration.
 
 ---
 
