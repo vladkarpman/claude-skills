@@ -7,7 +7,7 @@ Build or improve prompts using the proven 6-component framework.
 - **Two modes**: Improve existing prompts or build new ones from scratch
 - **6-component framework**: Persona, Task, Steps, Context, Goal, Format
 - **Interactive guidance**: Analyzes gaps and asks targeted questions
-- **Visual feedback**: Shows what's present (✅), weak (⚠️), or missing (❌)
+- **Visual feedback**: Shows what's present (✅), vague (🟡), or missing (❌)
 
 ## The Framework
 

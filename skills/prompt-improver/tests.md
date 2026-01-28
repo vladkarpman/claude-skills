@@ -171,23 +171,21 @@ Test cases to verify the skill works correctly. Each test includes an input, exp
 
 ---
 
-## Test 9: Output Variations
+## Test 9: Suggesting Answers
 
 **Input:**
-> "Improve this prompt and give me 3 variations: write a product description"
+> "Improve this: write code to parse JSON"
 
 **Expected Behavior:**
-1. After gathering info, generates 3 distinct versions:
-   - Concise version
-   - Structured version
-   - Conversational version
-2. Labels each variation
+1. Framework Analysis shows gaps
+2. When asking questions, provides suggested answers based on context
+3. Offers multiple-choice options where applicable
 
 **Success Criteria:**
-- [ ] Exactly 3 variations provided
-- [ ] Each variation is noticeably different in style
-- [ ] Each has a style label
-- [ ] Each still contains the core 6 components
+- [ ] Questions include "💡" suggestions based on the task
+- [ ] Provides concrete options (e.g., `a`, `b`, `c` choices)
+- [ ] Suggestions are relevant to "parsing JSON" context
+- [ ] User can accept suggestion or provide custom answer
 
 ---
 
@@ -235,7 +233,7 @@ To test the skill:
 | 6. Build — Complete Flow | ⬜ | |
 | 7. Complexity — Simple | ⬜ | |
 | 8. Complexity — Complex | ⬜ | |
-| 9. Output Variations | ⬜ | |
+| 9. Suggesting Answers | ⬜ | |
 | 10. Preserving Intent | ⬜ | |
 
 **Total: ⬜/10 passed**

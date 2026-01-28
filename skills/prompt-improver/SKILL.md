@@ -1,8 +1,8 @@
 ---
 name: prompt-improver
 description: |
-  TRIGGERS — Use this skill IMMEDIATELY when user:
-  • Types "improve-prompt", "improve prompt", or "/improve-prompt" → use Improve Mode
+  TRIGGERS — This skill should be used IMMEDIATELY when the user:
+  • Types "improve-prompt", "improve prompt", "/improve-prompt", or "optimize this prompt" → use Improve Mode
   • Types "build-prompt", "build prompt", or "/build-prompt" → use Build Mode
   • Types "create a prompt", "write a prompt", or "help me write a prompt" → use Build Mode
   • Types "analyze this prompt", "analyze my prompt", or "review this prompt" → use Improve Mode
@@ -63,9 +63,9 @@ Present your analysis using this format:
 | Component | Status | Notes |
 |:----------|:------:|:------|
 | Persona | ❌ | missing |
-| Task | 🟡 | too vague, needs specifics |
-| Steps | ➖ | not needed |
-| Context | ❌ | missing |
+| Task | ✅ | clear and specific |
+| Steps | ➖ | not needed for this task |
+| Context | 🟡 | vague, needs specifics |
 | Goal | ❌ | missing |
 | Format | ❌ | missing |
 
@@ -105,7 +105,7 @@ Ask ONE question at a time. Use this format:
 **Guidelines:**
 - Wait for each answer before asking the next
 - **Suggest answers** based on available context
-- **Priority order:** Task → Goal → Context → Persona → Format → Steps
+- **Priority order:** Task → Goal → Persona → Context → Steps → Format
 
 ### Step 4: Generate Improved Prompt
 
@@ -232,3 +232,7 @@ Use the same format as Improve Mode (Step 4), then show the completion message.
 - Don't over-engineer simple requests
 - If a prompt is already good, say so
 - Match complexity of improvement to complexity of task
+
+## References
+
+See `examples.md` for additional before/after transformations and edge cases.

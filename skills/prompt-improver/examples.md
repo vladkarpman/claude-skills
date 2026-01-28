@@ -16,7 +16,7 @@ Additional before/after examples using the 6-component framework (Persona, Task,
 | Component | Status | Found |
 |-----------|--------|-------|
 | Persona   | ❌ | missing |
-| Task      | ⚠️ | "api call to get weather" - vague |
+| Task      | 🟡 | "api call to get weather" - vague |
 | Steps     | ❌ | missing |
 | Context   | ❌ | missing - which API? which language? |
 | Goal      | ❌ | missing |
@@ -62,7 +62,7 @@ Format:
 | Component | Status | Found |
 |-----------|--------|-------|
 | Persona   | ❌ | missing |
-| Task      | ⚠️ | "get users" - vague |
+| Task      | 🟡 | "get users" - vague |
 | Steps     | ❌ | missing |
 | Context   | ❌ | missing - which database? which users? |
 | Goal      | ❌ | missing |
@@ -145,7 +145,7 @@ Format:
 | Component | Status | Found |
 |-----------|--------|-------|
 | Persona   | ❌ | missing |
-| Task      | ⚠️ | "blog post about AI" - too broad |
+| Task      | 🟡 | "blog post about AI" - too broad |
 | Steps     | ❌ | missing |
 | Context   | ❌ | missing - audience? angle? |
 | Goal      | ❌ | missing |
@@ -196,7 +196,7 @@ Format:
 | Component | Status | Found |
 |-----------|--------|-------|
 | Persona   | ❌ | missing |
-| Task      | ⚠️ | "analyze" - vague |
+| Task      | 🟡 | "analyze" - vague |
 | Steps     | ❌ | missing |
 | Context   | ❌ | missing - what data? what for? |
 | Goal      | ❌ | missing |
@@ -251,7 +251,7 @@ Prioritized actions with expected impact
 | Component | Status | Found |
 |-----------|--------|-------|
 | Persona   | ❌ | missing |
-| Task      | ⚠️ | "review" - vague criteria |
+| Task      | 🟡 | "review" - vague criteria |
 | Steps     | ❌ | missing |
 | Context   | ❌ | missing - what to focus on? |
 | Goal      | ❌ | missing |
