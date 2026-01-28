@@ -50,20 +50,24 @@ Present your analysis using this format:
 |:----------|:------:|:------|
 | Persona | ❌ | missing |
 | Task | ✅ | clear and specific |
-| Steps | ➖ | not needed for this task |
+| Steps | ❌ | missing |
 | Context | 🟡 | vague, needs specifics |
 | Goal | ❌ | missing |
 | Format | ❌ | missing |
 
-**Legend:** ✅ Clear · 🟡 Vague · ❌ Missing · ➖ Not needed
+**Legend:** ✅ Clear · 🟡 Vague · ❌ Missing
 
 ---
 
 ### Step 2: Assess Complexity
 
-- **Simple** (factual questions) → Only need: Task + Format
-- **Medium** (content creation) → Need: Persona + Task + Context + Goal + Format
-- **Complex** (multi-step work) → Need all 6 components
+Complexity determines which questions to ask (not what's shown in analysis):
+
+- **Simple** (factual questions) → Ask about: Task, Format
+- **Medium** (content creation) → Ask about: Task, Goal, Persona, Context, Format
+- **Complex** (multi-step work) → Ask about all 6 components
+
+The Framework Analysis shows what's actually in the prompt. Complexity determines which gaps to fill.
 
 ### Step 3: Fill Gaps
 
@@ -83,8 +87,8 @@ Ask ONE question at a time. Use this format:
 - `a` **[Option A]** — description
 - `b` **[Option B]** — description
 - `c` **[Option C]** — description
-
-*Or describe in your own words.*
+- `own` — I'll write my own
+- `skip` — not needed for this prompt
 
 ---
 
@@ -92,6 +96,8 @@ Ask ONE question at a time. Use this format:
 - Wait for each answer before asking the next
 - **Suggest answers** based on available context
 - **Priority order:** Task → Goal → Persona → Context → Steps → Format
+- If user says `own`, ask them to describe it
+- If user says `skip`, omit that component from the final prompt
 
 ### Step 4: Generate Improved Prompt
 
