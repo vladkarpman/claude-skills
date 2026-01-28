@@ -59,15 +59,9 @@ Present your analysis using this format:
 
 ---
 
-### Step 2: Assess Complexity
+### Step 2: Identify Gaps
 
-Complexity determines which questions to ask (not what's shown in analysis):
-
-- **Simple** (factual questions) → Ask about: Task, Format
-- **Medium** (content creation) → Ask about: Task, Goal, Persona, Context, Format
-- **Complex** (multi-step work) → Ask about all 6 components
-
-The Framework Analysis shows what's actually in the prompt. Complexity determines which gaps to fill.
+Ask about ALL missing components (❌) and vague ones (🟡). User can `skip` any they don't need or provide `own` answer.
 
 ### Step 3: Fill Gaps
 
@@ -151,58 +145,65 @@ Your prompt is ready to use.
 
 ## Mode 2: Build Mode
 
-Ask ONE question at a time. Adapt based on complexity.
+Ask ONE question at a time. User can `skip` any component or provide `own` answer.
 
 ### Question Flow
 
-**❶ TASK** *(always ask)*
+**❶ TASK**
 
 > **What do you need the AI to do?**
 >
 > Describe the task or output you're looking for.
+>
+> - `own` — I'll write my own
+> - `skip` — not needed
 
-After this, assess complexity:
-- **Simple** → 2-3 questions (Task, Goal, Format)
-- **Medium** → 4-5 questions (add Persona, Context)
-- **Complex** → 5-6 questions (add Steps)
-
-**❷ GOAL** *(always ask)*
+**❷ GOAL**
 
 > **What does a successful result look like?**
 >
 > 💡 *Based on your task, I'd suggest: [criteria]*
+>
+> - `a` [Suggested criteria]
+> - `b` [Alternative]
+> - `own` — I'll write my own
+> - `skip` — not needed
 
-**❸ PERSONA** *(skip for simple)*
+**❸ PERSONA**
 
 > **What kind of expert should handle this?**
 >
 > 💡 *I'd suggest **[persona]** — [why]*
 >
-> Choose:
 > - `a` [Suggested persona]
 > - `b` [Alternative]
 > - `c` General assistant
+> - `own` — I'll write my own
+> - `skip` — not needed
 
-**❹ CONTEXT** *(skip for simple)*
+**❹ CONTEXT**
 
 > **Any context or constraints?**
 >
 > - Background info?
 > - Things to include/avoid?
 > - Tone or audience?
+>
+> - `own` — I'll write my own
+> - `skip` — not needed
 
-**❺ STEPS** *(only for complex)*
+**❺ STEPS**
 
 > **Should the AI follow specific steps?**
 >
 > 💡 *I'd suggest: [steps]*
 >
-> Choose:
 > - `a` Use suggested steps
-> - `b` Let AI decide
-> - `c` I'll specify custom steps
+> - `b` [Alternative approach]
+> - `own` — I'll write my own
+> - `skip` — not needed
 
-**❻ FORMAT** *(always ask)*
+**❻ FORMAT**
 
 > **How should the output be formatted?**
 >
@@ -211,6 +212,8 @@ After this, assess complexity:
 > - `c` Code
 > - `d` Table
 > - `e` Mixed
+> - `own` — I'll write my own
+> - `skip` — not needed
 
 ### Generate the Prompt
 
