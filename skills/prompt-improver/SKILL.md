@@ -1,28 +1,14 @@
 ---
 name: prompt-improver
 description: |
-  TRIGGERS — This skill should be used IMMEDIATELY when the user:
-  • Types "improve-prompt", "improve prompt", "/improve-prompt", or "optimize this prompt" → use Improve Mode
-  • Types "build-prompt", "build prompt", or "/build-prompt" → use Build Mode
-  • Types "create a prompt", "write a prompt", or "help me write a prompt" → use Build Mode
-  • Types "analyze this prompt", "analyze my prompt", or "review this prompt" → use Improve Mode
-  • Types "make this prompt better" or "fix this prompt" → use Improve Mode
-  • Starts message with any of the above followed by text
-
-  PATTERN — Identify the prompt to improve (Improve Mode only):
-  • Text in "quotes" after the trigger phrase
-  • Text in [square brackets] after the trigger phrase
-  • Text in ```code blocks``` after the trigger phrase
-  • If no quotes/brackets/blocks, treat everything after the trigger as the prompt
-
-  ALSO USE when user:
-  • Asks to improve, optimize, or refine a prompt → Improve Mode
-  • Asks to create, build, or write a new prompt → Build Mode
+  TRIGGERS — Use IMMEDIATELY when user:
+  • "improve-prompt", "improve prompt", "optimize this prompt", "analyze this prompt", "make this prompt better", "fix this prompt" → Improve Mode
+  • "build-prompt", "build prompt", "create a prompt", "write a prompt", "help me write a prompt" → Build Mode
   • Mentions "prompt engineering" or "6-component framework"
-  • Wants feedback on a prompt they wrote → Improve Mode
 
-  DO NOT USE when user wants help writing content (emails, documents) —
-  only use for prompts intended for AI assistants.
+  PATTERN (Improve Mode): Look for prompt in "quotes", [brackets], or ```code blocks```. If none, treat text after trigger as the prompt.
+
+  DO NOT USE for writing content (emails, documents) — only for prompts intended for AI assistants.
 ---
 
 # Prompt Improver
