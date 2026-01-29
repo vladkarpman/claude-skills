@@ -36,6 +36,28 @@ Every effective prompt has 6 components:
 
 If unclear, ask: *"Do you have a prompt you'd like to improve, or shall we build one from scratch?"*
 
+## Critical Rules
+
+These rules are mandatory for both Improve Mode and Build Mode:
+
+**MUST:**
+- MUST always show Framework Analysis first (Improve Mode) before anything else
+- MUST ask questions one at a time for each missing (❌) or vague (🟡) component
+- MUST wait for user response before proceeding to next question
+- MUST complete the full questioning workflow before generating output
+
+**NEVER:**
+- NEVER skip directly to output generation
+- NEVER generate an improved/new prompt without gathering missing information first
+- NEVER assume user wants to skip a component — user must explicitly say "skip"
+- NEVER bundle multiple questions into one message
+- NEVER decide on behalf of the user which components to include or exclude
+
+**User Control:**
+- Only the user can skip a component by explicitly saying "skip"
+- The model cannot decide to skip questions based on assumptions about the prompt
+- If the user wants to skip all questions, they must say so explicitly for each one
+
 ---
 
 ## Mode 1: Improve Mode
@@ -91,9 +113,13 @@ Ask ONE question at a time. Use this format:
 - **Suggest answers** based on available context
 - **Priority order:** Task → Goal → Persona → Context → Steps → Format
 - If user says `own`, ask them to describe it
-- If user says `skip`, omit that component from the final prompt
+- If user says `skip`, acknowledge it (e.g., "Skipping [component]") and omit that component from the final prompt
 
 ### Step 4: Generate Improved Prompt
+
+**MANDATORY FORMAT — Use exactly as shown:**
+
+The following template structure MUST be used exactly. No variations allowed (no "● Improved Prompt", no tables, no alternative formatting). Use this precise markdown structure:
 
 ---
 
@@ -119,7 +145,17 @@ You are [PERSONA].
 
 ---
 
+**Format requirements:**
+- Header MUST be exactly `### ✨ Improved Prompt` (with emoji)
+- Prompt content MUST be inside a code block (triple backticks)
+- Copy hint MUST appear after the code block exactly as shown
+- This format is non-negotiable — always use it
+
 ### Step 5: Show What Changed
+
+**MANDATORY FORMAT — Use exactly as shown:**
+
+Must NOT use a table format. Must use the bulleted list format below. This format is non-negotiable.
 
 ---
 
@@ -142,6 +178,13 @@ You are [PERSONA].
 Your prompt is ready to use.
 
 ---
+
+**Format requirements:**
+- Header MUST be exactly `### 📝 What Changed` (with emoji)
+- MUST use bulleted lists with `**✅ Added:**` and `**🔧 Clarified:**` sections
+- MUST NOT use a table with "Change" and "Reason" columns or any other table format
+- MUST include the `### 🎉 Done!` section at the end
+- This format is non-negotiable — always use it
 
 ## Mode 2: Build Mode
 
@@ -217,7 +260,9 @@ Ask ONE question at a time. User can `skip` any component or provide `own` answe
 
 ### Generate the Prompt
 
-Use the same format as Improve Mode (Step 4), then show the completion message.
+**MUST use the exact format shown in Improve Mode Step 4 — this is non-negotiable.**
+
+After generating the prompt, show the `### 🎉 Done!` completion message (same as Improve Mode Step 5).
 
 ---
 

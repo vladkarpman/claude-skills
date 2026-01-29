@@ -17,7 +17,7 @@ Test cases to verify the skill works correctly. Each test includes an input, exp
 
 **Success Criteria:**
 - [ ] Framework Analysis table is shown
-- [ ] At least 3 components marked as ❌ or ⚠️
+- [ ] At least 3 components marked as ❌ or 🟡
 - [ ] Asks at least one clarifying question before generating
 
 ---
@@ -61,7 +61,7 @@ Test cases to verify the skill works correctly. Each test includes an input, exp
 **Expected Behavior:**
 1. Framework Analysis shows most components missing/vague:
    - Persona: ❌
-   - Task: ⚠️ (vague)
+   - Task: 🟡 (vague)
    - Steps: ❌
    - Context: ❌
    - Goal: ❌
@@ -69,7 +69,7 @@ Test cases to verify the skill works correctly. Each test includes an input, exp
 2. Asks about: What kind of email? To whom? What's the purpose?
 
 **Success Criteria:**
-- [ ] Task marked as ⚠️ (present but vague)
+- [ ] Task marked as 🟡 (present but vague)
 - [ ] At least 4 components marked as ❌
 - [ ] Asks targeted questions about missing components
 - [ ] Final prompt includes all 6 components
@@ -89,9 +89,9 @@ Test cases to verify the skill works correctly. Each test includes an input, exp
 1. Framework Analysis shows most components present:
    - Persona: ✅
    - Task: ✅
-   - Steps: ❌ or ⚠️
+   - Steps: ❌ or 🟡
    - Context: ✅
-   - Goal: ⚠️ (implicit)
+   - Goal: 🟡 (implicit)
    - Format: ✅
 2. Offers minor improvements only
 
@@ -208,6 +208,108 @@ Test cases to verify the skill works correctly. Each test includes an input, exp
 
 ---
 
+## Test 11: Output Format — Improved Prompt Header
+
+**Input:**
+> "Improve this: summarize this document"
+
+**After completing the interactive questions**
+
+**Expected Behavior:**
+1. Output uses exact header format: `### ✨ Improved Prompt`
+2. Prompt content is inside a code block (triple backticks)
+3. Copy hint appears: `> 📋 *Copy and use with any AI assistant.*`
+
+**Success Criteria:**
+- [ ] Header is exactly `### ✨ Improved Prompt` (with ✨ emoji)
+- [ ] Does NOT use `● Improved Prompt` or other bullet formats
+- [ ] Does NOT use `## Improved Prompt` (wrong heading level)
+- [ ] Prompt is inside code block
+- [ ] Copy hint is present after the code block
+
+---
+
+## Test 12: Output Format — What Changed Section
+
+**Input:**
+> "Improve this: write a function"
+
+**After generating the improved prompt**
+
+**Expected Behavior:**
+1. "What Changed" section uses bulleted list format
+2. Includes `**✅ Added:**` section
+3. Includes `**🔧 Clarified:**` section (if applicable)
+4. Includes `**💡 Why this is better:**` explanation
+5. Ends with `### 🎉 Done!` message
+
+**Success Criteria:**
+- [ ] Header is exactly `### 📝 What Changed` (with 📝 emoji)
+- [ ] Does NOT use a table with "Change" and "Reason" columns
+- [ ] Uses bulleted list format with `**✅ Added:**` etc.
+- [ ] `### 🎉 Done!` section appears at the end
+- [ ] "Your prompt is ready to use." message is present
+
+---
+
+## Test 13: Workflow Enforcement — Cannot Skip Interactive Phase
+
+**Input:**
+> "Improve this: create an api endpoint"
+
+**Expected Behavior:**
+1. Shows Framework Analysis table FIRST (before anything else)
+2. Asks questions one at a time for missing components
+3. Does NOT jump directly to generating improved prompt
+4. Waits for user response before each next question
+
+**Success Criteria:**
+- [ ] Framework Analysis is shown before any questions
+- [ ] At least one question is asked before generating output
+- [ ] Questions are asked one at a time (not bundled)
+- [ ] Does NOT generate improved prompt immediately after analysis
+
+---
+
+## Test 14: Workflow Enforcement — User Must Say "Skip"
+
+**Input sequence:**
+1. "Improve this: write a test"
+2. (User provides minimal responses but doesn't say "skip")
+
+**Expected Behavior:**
+1. Model continues asking about missing components
+2. Model does NOT decide to skip components on its own
+3. Only skips when user explicitly says "skip"
+
+**Success Criteria:**
+- [ ] Model asks about each missing/vague component
+- [ ] Model does NOT assume user wants to skip any component
+- [ ] If user says "skip", that component is omitted from final prompt
+- [ ] Model acknowledges "skip" explicitly before moving on
+
+---
+
+## Test 15: Build Mode — Output Format
+
+**Input sequence:**
+1. "Build me a prompt for code review"
+2. (Complete the question flow)
+
+**Expected Behavior:**
+1. Uses same output format as Improve Mode
+2. Header: `### ✨ Improved Prompt` (note: same header for both modes)
+3. Ends with `### 🎉 Done!` message
+
+**Success Criteria:**
+- [ ] Header is exactly `### ✨ Improved Prompt`
+- [ ] Prompt is inside code block
+- [ ] Copy hint is present
+- [ ] `### 🎉 Done!` section appears at the end
+- [ ] Does NOT use different format than Improve Mode
+
+---
+
 ## Running Tests
 
 To test the skill:
@@ -217,7 +319,7 @@ To test the skill:
 3. Check against Success Criteria
 4. Mark as PASS/FAIL
 
-**Passing threshold:** 8/10 tests should pass for the skill to be considered working correctly.
+**Passing threshold:** 12/15 tests should pass for the skill to be considered working correctly.
 
 ---
 
@@ -235,5 +337,12 @@ To test the skill:
 | 8. Complexity — Complex | ⬜ | |
 | 9. Suggesting Answers | ⬜ | |
 | 10. Preserving Intent | ⬜ | |
+| 11. Output Format — Header | ⬜ | |
+| 12. Output Format — What Changed | ⬜ | |
+| 13. Workflow — No Skip | ⬜ | |
+| 14. Workflow — Explicit Skip | ⬜ | |
+| 15. Build Mode — Output Format | ⬜ | |
 
-**Total: ⬜/10 passed**
+**Total: ⬜/15 passed**
+
+**Minimum passing:** 12/15 tests (80%)

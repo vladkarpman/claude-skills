@@ -20,7 +20,7 @@ If no prompt was provided, ask the user to paste their prompt.
 ## Process
 
 1. Analyze the prompt against the 6-component framework (Persona, Task, Steps, Context, Goal, Format)
-2. Show the Framework Analysis table with status indicators (✅ ⚠️ ❌ ➖)
+2. Show the Framework Analysis table with status indicators (✅ 🟡 ❌)
 3. Assess complexity (Simple/Medium/Complex) to determine which components are needed
 4. Ask ONE question at a time about missing or weak components
 5. Generate the improved prompt once you have enough information

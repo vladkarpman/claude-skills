@@ -46,7 +46,7 @@ Every skill improvement follows this analysis structure:
 
 ## Skill Modes
 
-**Improve Mode**: Analyze prompt → Show gaps (✅/⚠️/❌) → Ask questions one-by-one → Generate improved version
+**Improve Mode**: Analyze prompt → Show gaps (✅/🟡/❌) → Ask questions one-by-one → Generate improved version
 
 **Build Mode**: Ask Task → Goal → Persona → Context → Steps → Format (one question at a time) → Generate prompt
 
