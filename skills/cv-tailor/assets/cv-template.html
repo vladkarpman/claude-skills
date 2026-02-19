@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{FULL_NAME}} - CV</title>
+<style>
+  @page {
+    size: A4;
+    margin: 0.5in 0.6in 0.5in 0.6in;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.35;
+    color: #333333;
+  }
+
+  /* ── Header / Name ── */
+  .header {
+    text-align: center;
+    margin-bottom: 6pt;
+  }
+
+  .header h1 {
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: 1.5pt;
+    color: #222222;
+    margin-bottom: 3pt;
+  }
+
+  .contact-info {
+    font-size: 9pt;
+    color: #555555;
+    text-align: center;
+    margin-bottom: 2pt;
+  }
+
+  .contact-info a {
+    color: #555555;
+    text-decoration: none;
+  }
+
+  .contact-separator {
+    margin: 0 4pt;
+  }
+
+  /* ── Section Headings ── */
+  .section-heading {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #2B579A;
+    text-transform: uppercase;
+    border-bottom: 1.5pt solid #2B579A;
+    padding-bottom: 2pt;
+    margin-top: 8pt;
+    margin-bottom: 4pt;
+  }
+
+  /* ── Professional Summary ── */
+  .summary {
+    font-style: italic;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    margin-bottom: 2pt;
+  }
+
+  /* ── Core Skills ── */
+  .skills-section {
+    margin-bottom: 2pt;
+  }
+
+  .skill-category {
+    margin-bottom: 2pt;
+    line-height: 1.35;
+  }
+
+  .skill-label {
+    font-weight: 700;
+    color: #2B579A;
+  }
+
+  /* ── Work Experience ── */
+  .experience-entry {
+    margin-bottom: 6pt;
+  }
+
+  .experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0;
+  }
+
+  .company-name {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #222222;
+  }
+
+  .date-range {
+    font-size: 9.5pt;
+    color: #333333;
+    white-space: nowrap;
+  }
+
+  .job-title {
+    font-style: italic;
+    font-size: 9.5pt;
+    color: #333333;
+    margin-bottom: 2pt;
+  }
+
+  .achievements {
+    list-style-type: disc;
+    margin-left: 16pt;
+    padding-left: 0;
+  }
+
+  .achievements li {
+    margin-bottom: 1pt;
+    line-height: 1.35;
+  }
+
+  /* ── Education ── */
+  .education-entry {
+    margin-bottom: 2pt;
+  }
+
+  .education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .education-school {
+    font-weight: 700;
+    font-size: 9.5pt;
+  }
+
+  .education-year {
+    font-size: 9.5pt;
+    color: #333333;
+    white-space: nowrap;
+  }
+
+  .education-degree {
+    font-size: 9.5pt;
+  }
+
+  /* ── Certifications ── */
+  .certifications {
+    font-size: 9.5pt;
+  }
+
+  /* ── Languages ── */
+  .languages {
+    font-size: 9.5pt;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>{{FULL_NAME}}</h1>
+</div>
+<div class="contact-info">{{EMAIL}}</div>
+<div class="contact-info">{{LINKEDIN}}<span class="contact-separator">&bull;</span>{{GITHUB}}</div>
+
+<!-- Professional Summary -->
+<div class="section-heading">Professional Summary</div>
+<div class="summary">{{PROFESSIONAL_SUMMARY}}</div>
+
+<!-- Core Skills -->
+<div class="section-heading">Core Skills</div>
+<div class="skills-section">
+  <div class="skill-category"><span class="skill-label">Android Application Development:</span> {{SKILLS_ANDROID}}</div>
+  <div class="skill-category"><span class="skill-label">Backend &amp; Data Management:</span> {{SKILLS_BACKEND}}</div>
+  <div class="skill-category"><span class="skill-label">Testing &amp; Quality Assurance:</span> {{SKILLS_TESTING}}</div>
+  <div class="skill-category"><span class="skill-label">DevOps &amp; Release Management:</span> {{SKILLS_DEVOPS}}</div>
+  <div class="skill-category"><span class="skill-label">Leadership &amp; Collaboration:</span> {{SKILLS_LEADERSHIP}}</div>
+</div>
+
+<!-- Work Experience -->
+<div class="section-heading">Work Experience</div>
+{{EXPERIENCE_ENTRIES}}
+
+<!-- Education -->
+<div class="section-heading">Education</div>
+{{EDUCATION}}
+
+<!-- Certifications -->
+<div class="section-heading">Certifications</div>
+<div class="certifications">{{CERTIFICATIONS}}</div>
+
+<!-- Languages -->
+<div class="section-heading">Languages</div>
+<div class="languages">{{LANGUAGES}}</div>
+
+</body>
+</html>
