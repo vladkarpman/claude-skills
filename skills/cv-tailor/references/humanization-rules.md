@@ -125,14 +125,15 @@ After applying humanization rules, verify the output against AI detection tools.
 
 1. Paste the professional summary into GPTZero. Check the AI probability score.
 2. Paste the full cover letter body (excluding header/signature) into GPTZero. Check the AI probability score.
-3. Target: **below 10% AI probability** on both checks.
+3. Target: **0% AI probability** on both checks.
 
-### If flagged (10%+ AI probability)
+### If flagged (above 0% AI probability)
 
 1. Identify which sentences GPTZero highlights as AI-generated.
-2. Rewrite flagged sentences with more specificity: add a concrete detail, change the sentence structure, or replace an AI-typical phrase.
+2. Re-read Sections 2-5 of this document. Apply the rules to the flagged sentences: add a concrete detail, change the sentence structure, vary the opener type, or replace an AI-typical phrase.
 3. Re-check with GPTZero.
-4. Maximum **2 rewrite-and-check iterations**. If the score does not drop below 10% after two passes, accept the result and note it in the output.
+4. Repeat until the score reaches 0%. Maximum **3 rewrite-and-check iterations** per piece (summary and cover letter are checked independently).
+5. If the score has not reached 0% after 3 iterations, **stop the pipeline** and ask the user how to proceed. Do not accept a non-zero score silently.
 
 ### What to skip
 
