@@ -9,6 +9,7 @@ A collection of reusable skills for Claude that enhance its capabilities for spe
 | Skill | Description |
 |-------|-------------|
 | [prompt-improver](./skills/prompt-improver/) | Build or improve prompts using the 6-component framework (Persona, Task, Steps, Context, Goal, Format) |
+| [think](./skills/think/) | Universal task entry point — orchestrates superpowers skills and adds OpenAI Codex CLI as an adversarial second opinion |
 
 ## Commands
 
@@ -16,6 +17,7 @@ A collection of reusable skills for Claude that enhance its capabilities for spe
 |---------|-------------|
 | `/improve-prompt` | Analyze and improve an existing prompt |
 | `/build-prompt` | Build a new prompt from scratch |
+| `/think` | Start any task with superpowers orchestration + Codex adversarial review |
 
 ## Installation
 
@@ -39,6 +41,7 @@ After installation, use the commands:
 ```bash
 /improve-prompt write code to process data
 /build-prompt
+/think add user authentication to the REST API
 ```
 
 ### Claude Desktop / Claude Cowork
