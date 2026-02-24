@@ -12,6 +12,7 @@ A Claude Code plugin providing prompt engineering skills. Users can analyze/impr
 |---------|-------------|
 | `/improve-prompt [prompt]` | Analyze and improve an existing prompt |
 | `/build-prompt [description]` | Build a new prompt from scratch interactively |
+| `/think [task]` | Start any task with superpowers + Codex adversarial review |
 
 ## Architecture
 
@@ -26,6 +27,10 @@ skills/
     README.md                # User documentation
     examples.md              # Before/after transformation examples
     tests.md                 # Test cases
+  think/
+    SKILL.md                 # Orchestrator + Codex review loop
+    references/
+      codex-review.md        # Review prompt template
   _template/                 # Template for new skills
 ```
 
