@@ -12,7 +12,7 @@ A Claude Code plugin providing prompt engineering skills. Users can analyze/impr
 |---------|-------------|
 | `/improve-prompt [prompt]` | Analyze and improve an existing prompt |
 | `/build-prompt [description]` | Build a new prompt from scratch interactively |
-| `/think [task]` | Socratic thinking partner for hard decisions + optional Codex second opinion |
+| `/think [task]` | Socratic thinking partner + Claude x Codex deliberation for hard decisions |
 | `/team-up [task]` | Orchestrate an agent team: refine task, design team, execute, review |
 
 ## Architecture
@@ -31,7 +31,7 @@ skills/
   think/
     SKILL.md                 # Socratic thinking partner
     references/
-      codex-opinion.md       # Independent opinion prompt for Codex
+      codex-deliberation.md  # Multi-round deliberation prompt for Codex
   team-up/
     SKILL.md                 # Agent team lifecycle orchestrator
     references/
