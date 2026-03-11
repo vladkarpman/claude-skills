@@ -1,16 +1,26 @@
 ---
 name: think
 description: >
-  Socratic thinking partner for hard decisions. Challenges assumptions, surfaces trade-offs,
-  and helps you think through problems clearly. Optionally gets an independent second opinion
-  from Codex. Trigger phrases: "think about", "let's think", "help me decide", or /think command.
+  Socratic thinking partner + Claude x Codex deliberation for hard decisions. Challenges
+  assumptions, surfaces trade-offs, then Claude and Codex deliberate to find the best answer.
+  Trigger phrases: "think about", "let's think", "help me decide", or /think command.
 ---
 
-# Think — Socratic Thinking Partner
+# Think — Claude x Codex Deliberation
 
-A conversational thinking partner for hard decisions. You play Socratic challenger — asking sharp questions, surfacing hidden assumptions, and stress-testing reasoning. Codex provides an independent cold opinion on demand.
+A structured thinking system for hard decisions. Phase 1: you and Claude explore the problem through Socratic dialogue. Phase 2: Claude and Codex deliberate independently to find the best answer. Phase 3: they present their recommendation for your feedback. Repeat until you're satisfied.
 
-Stay in this conversation — do not invoke other skills mid-dialogue. You may suggest them as a next step once the thinking converges (see Phase 3).
+Stay in this conversation — do not invoke other skills mid-dialogue. You may suggest them as a next step once the thinking converges (see Phase 4).
+
+---
+
+## Entry Gate: Verify Codex CLI
+
+Before anything else, run `which codex` via bash. If Codex is not installed, refuse to proceed:
+
+> "The /think skill requires Codex CLI for cross-model deliberation. Install it with `npm install -g @openai/codex`, then try again."
+
+Do NOT fall back to a Codex-less mode. The deliberation is the point of this skill.
 
 ---
 
@@ -52,35 +62,33 @@ Ask **one question at a time**. Wait for the answer before asking the next. Use 
 
 ### When to move on
 
-Continue conversational rounds until the user:
-- Signals they've decided ("I think I'll go with...", "okay, let's do...")
-- Asks for a second opinion ("what does Codex think?", "get a second opinion")
-- Asks to wrap up ("let's wrap up", "summarize", "I'm done thinking")
+Continue conversational rounds until the user signals readiness for deliberation:
+- "okay, figure it out", "what do you recommend", "go think about it", "deliberate"
+- "let's wrap up", "I'm done thinking", "summarize" — these ALSO trigger deliberation first. Say: "Before we wrap up, let me run this by Codex so we can give you our best recommendation."
+
+If the user says "cancel" or "stop", the skill ends without output. But any path to a decision **must** go through deliberation.
 
 ---
 
-## Phase 2: Codex Cold Opinion (on demand)
+## Phase 2: Claude <-> Codex Deliberation
 
-Triggered when the user says something like:
-- "get a second opinion"
-- "what does Codex think?"
-- "second opinion"
-- "ask Codex"
+### Step 1: Write the brief
 
-### How to get the opinion
+Compose a concise brief covering:
+- The problem being discussed
+- Key constraints discovered during Socratic dialogue
+- Trade-offs identified
 
-1. Write a concise brief covering:
-   - The problem being discussed
-   - Key constraints
-   - Current thinking / direction the user is leaning
-   - Main trade-offs identified
+**CRITICAL: Do NOT include the user's lean, preference, or stated direction.** Codex must get a clean, unbiased slate. This is a hard rule — do not hint at what the user prefers.
 
-2. Read the prompt template from `references/codex-opinion.md` in this skill's directory.
+### Step 2: Send to Codex (Round 1)
 
-3. Send to Codex:
+Show the user: "Sending brief to Codex..."
+
+Read the prompt template from `references/codex-deliberation.md` in this skill's directory. Send to Codex:
 
 ```bash
-codex exec -p "<opinion-prompt-content>
+codex exec -p "<deliberation-prompt-content>
 
 ## Brief
 
@@ -89,17 +97,88 @@ codex exec -p "<opinion-prompt-content>
 
 Do NOT pass `--model` or `--reasoning` flags — let Codex use the user's global config.
 
-This is a single cold shot. No session resuming, no follow-up rounds. The independence is the point.
+### Step 3: Multi-round deliberation
 
-4. If Codex CLI is not installed or the command fails, tell the user: "Codex CLI isn't available — I can't get an external opinion right now. We can continue without it, or you can install it with `npm install -g @openai/codex`."
+After receiving Codex's response:
 
-5. Present Codex's take to the user. If Codex disagrees with the current direction, facilitate discussion: "Codex raises an interesting point about X. What do you think?"
+1. Evaluate Codex's analysis. Form your own position — agree, disagree, or build on it.
+2. If the discussion needs to continue, send another round to Codex:
+
+```bash
+codex exec -p "<deliberation-prompt-content>
+
+## Deliberation So Far
+<prior rounds>
+
+## Claude's Current Position
+<your latest argument or response>
+
+## What To Address
+<specific question or challenge for this round>"
+```
+
+3. Show the user: "Codex responded. Discussing further..."
+
+**Context accumulation:**
+- Rounds 1-3: include full verbatim dialogue history
+- Rounds 4+: summarize prior rounds into a "story so far" to manage token limits
+- If a `codex exec` call fails due to prompt length, summarize and retry once
+
+### Step 4: Convergence
+
+Stop deliberating and present to the user when:
+- Both models agree on the top recommendation
+- Arguments are repeating — no new information is being surfaced
+- The core trade-off is clearly framed and further rounds won't resolve it
+- Minimum: 1 round (if Codex agrees and adds nothing new, that's sufficient)
+- **Maximum: 7 rounds.** After 7, present current state as genuine disagreement.
+
+Show the user: "Converging on a recommendation..."
+
+### Handling disagreement
+
+**Default:** Frame the core tension — what the disagreement is really about, what trade-off the user is choosing between, why reasonable models disagree. This is the most useful output: not two opinions, but a clear framing of the actual decision.
+
+**Escalation:** If the disagreement is too nuanced for a clean framing, run one final head-to-head exchange where each side directly addresses the other's strongest argument. Present both final statements to the user.
+
+### Error handling
+
+- **Codex fails mid-deliberation:** Present what you have so far. Explain Codex became unavailable. Offer your own solo analysis for remaining points. The deliberation requirement is satisfied if at least one successful round completed.
+- **Codex returns empty/nonsensical response:** Retry once. If still bad, treat as failure (see above).
+- **Codex refuses the prompt:** Present the refusal to the user and continue with solo analysis.
 
 ---
 
-## Phase 3: Converge + Transition
+## Phase 3: Presentation + Feedback Loop
 
-When the user signals they've decided or wants to wrap up:
+### Present the recommendation
+
+Present the joint conclusion to the user:
+- **Recommendation**: The approach and reasoning
+- **Key deliberation points**: The strongest arguments that shaped the conclusion
+- **Caveats**: Any dissenting views or unresolved tensions
+
+If Claude and Codex disagreed, present it as an analyzed disagreement (see "Handling disagreement" above).
+
+### Feedback loop
+
+The user may critique the recommendation ("I don't like X", "what about Y?", "you missed Z").
+
+When the user provides feedback:
+1. Write a **new brief** incorporating:
+   - The original problem context
+   - A summary of the previous deliberation and its conclusion
+   - The user's specific feedback and concerns
+2. Run another Claude <-> Codex deliberation round (Phase 2)
+3. Present the updated recommendation
+
+Repeat until the user is satisfied.
+
+---
+
+## Phase 4: Converge + Transition
+
+When the user approves the recommendation:
 
 ### Summarize
 
@@ -160,24 +239,40 @@ Offer to invoke the suggested skill. Don't invoke automatically.
 
 **Claude**: "Before we get into repo structure — how many services are you starting with, and how many people will be working on them?"
 
-*(several rounds of questions about team size, deployment strategy, shared code, CI/CD preferences)*
+*(several rounds of Socratic dialogue about team size, deployment strategy, shared code, CI/CD preferences)*
 
-**Claude**: "You're assuming your services will diverge significantly over time. But you mentioned they share auth, logging, and the data layer. That's a lot of shared code that'll drift between repos. The strongest argument for polyrepo in your case is independent deployment — but you can get that with a monorepo and proper CI pipelines too."
+**User**: "Okay, figure it out"
 
-**User**: "Get a second opinion"
+**Claude**: "Sending brief to Codex..."
 
-*(Codex provides independent take)*
+*(Claude sends brief WITHOUT the user's lean — just problem, constraints, trade-offs)*
 
-**User**: "Okay, let's go with monorepo"
+*(2-3 rounds of Claude <-> Codex deliberation)*
+
+**Claude**: "Converging on a recommendation..."
+
+**Claude**: "Here's what we recommend: **Monorepo with Nx/Turborepo.** Your services share auth, logging, and data access — that's 60% common code. Independent deployment is achievable through proper CI pipeline configuration. Codex and I both converged on this, though Codex specifically flagged that you should plan your CI cache strategy early to avoid slow builds at scale."
+
+**User**: "What about using git submodules instead?"
+
+*(Claude incorporates feedback, runs another deliberation round with Codex)*
+
+**Claude**: Presents updated recommendation addressing submodules.
+
+**User**: "Okay, let's go with the monorepo approach"
 
 **Claude**: Summarizes decision, reasoning, risks. Offers to save decision doc and suggests `writing-plans`.
 
-### Example 2: Technical Trade-off
+### Example 2: Genuine Disagreement
 
-**User**: `/think we're hitting rate limits on our third-party API — should we add caching or queue requests?`
+**User**: `/think should we build our own auth system or use Auth0?`
 
-**Claude**: "What's the access pattern? Are you hitting the same data repeatedly, or is every request unique?"
+*(Socratic dialogue, then deliberation)*
 
-*(dialogue explores staleness tolerance, request patterns, latency requirements)*
+**Claude**: "Codex and I couldn't fully agree on this one, and that's actually informative. Here's the core tension:
 
-**Claude**: "Interesting — your pre-mortem scenario where the cache serves stale pricing data for 5 minutes is actually worse than a queued request that's 30 seconds late. That changes the calculus."
+**Claude's position**: Build custom auth. Your compliance requirements (SOC2 + HIPAA) mean you'll end up customizing Auth0 so heavily that you lose the 'managed service' benefit. Better to own it from day one.
+
+**Codex's position**: Use Auth0. The compliance argument cuts the other way — Auth0 has pre-built compliance tooling that would take months to replicate. The customization overhead is real but bounded.
+
+**What this comes down to**: How much do you trust a vendor's compliance tooling vs. your team's ability to build compliant auth from scratch? This is a bet on your team's security engineering depth."
