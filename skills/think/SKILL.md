@@ -143,9 +143,10 @@ Show the user: "Converging on a recommendation..."
 
 ### Error handling
 
-- **Codex fails mid-deliberation:** Present what you have so far. Explain Codex became unavailable. Offer your own solo analysis for remaining points. The deliberation requirement is satisfied if at least one successful round completed.
-- **Codex returns empty/nonsensical response:** Retry once. If still bad, treat as failure (see above).
-- **Codex refuses the prompt:** Present the refusal to the user and continue with solo analysis.
+- **Codex fails on round 1 (zero successful rounds):** Inform the user that deliberation could not be completed. Offer to retry. Do NOT present a solo recommendation — the deliberation hard gate requires at least one successful Codex round.
+- **Codex fails mid-deliberation (1+ successful rounds):** Present what you have so far. Explain Codex became unavailable. Offer your own solo analysis for remaining points. The deliberation requirement is satisfied.
+- **Codex returns empty/nonsensical response:** Retry once. If still bad, treat as a round-1 or mid-deliberation failure depending on how many rounds succeeded.
+- **Codex refuses the prompt:** Present the refusal to the user and offer to retry with a rephrased brief.
 
 ---
 

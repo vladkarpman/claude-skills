@@ -20,6 +20,8 @@ preferences or leanings.
 **Challenges**: What concerns you about the current direction (if any).
 **Alternatives**: Other approaches worth considering (if any).
 
+In subsequent rounds, include only the sections relevant to advancing the discussion — don't mechanically repeat unchanged positions.
+
 ## Rules
 
 - Be concise — this is a working discussion, not a formal report
