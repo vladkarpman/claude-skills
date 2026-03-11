@@ -1,6 +1,6 @@
 ---
 name: think
-description: Think through a hard problem with a Socratic thinking partner and optional Codex second opinion
+description: Think through a hard problem with Claude x Codex deliberation
 arguments:
   - name: task
     description: The problem, question, or decision you want to think through
@@ -9,7 +9,7 @@ arguments:
 
 # Think
 
-Use the think skill as a Socratic thinking partner for hard decisions.
+Use the think skill for structured deliberation on hard decisions.
 
 ## Input
 
@@ -19,9 +19,10 @@ If no input was provided, ask the user what they'd like to think through.
 
 ## Process
 
-1. Engage in Socratic dialogue — ask sharp questions, challenge assumptions, surface trade-offs
-2. If the user requests a second opinion, get an independent take from Codex
-3. When ready, summarize the decision, reasoning, and risks
-4. Suggest the logical next skill based on the decision
+1. Verify Codex CLI is installed (required)
+2. Engage in Socratic dialogue — ask sharp questions, challenge assumptions, surface trade-offs
+3. When ready, Claude and Codex deliberate to find the best recommendation
+4. Present the recommendation for your feedback
+5. Iterate until you're satisfied, then summarize and suggest next steps
 
 Follow the full process defined in the think skill.
