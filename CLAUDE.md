@@ -12,7 +12,8 @@ A Claude Code plugin providing prompt engineering skills. Users can analyze/impr
 |---------|-------------|
 | `/improve-prompt [prompt]` | Analyze and improve an existing prompt |
 | `/build-prompt [description]` | Build a new prompt from scratch interactively |
-| `/think [task]` | Start any task with superpowers + Codex adversarial review |
+| `/think [task]` | Socratic thinking partner for hard decisions + optional Codex second opinion |
+| `/team-up [task]` | Orchestrate an agent team: refine task, design team, execute, review |
 
 ## Architecture
 
@@ -28,9 +29,14 @@ skills/
     examples.md              # Before/after transformation examples
     tests.md                 # Test cases
   think/
-    SKILL.md                 # Orchestrator + Codex review loop
+    SKILL.md                 # Socratic thinking partner
     references/
-      codex-review.md        # Review prompt template
+      codex-opinion.md       # Independent opinion prompt for Codex
+  team-up/
+    SKILL.md                 # Agent team lifecycle orchestrator
+    references/
+      team-plan-template.md  # Team plan presentation template
+      teammate-prompt-template.md  # Teammate system prompt template
   _template/                 # Template for new skills
 ```
 

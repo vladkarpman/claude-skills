@@ -1,6 +1,6 @@
 {
   "name": "claude-skills",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "A collection of reusable skills for Claude that enhance its capabilities for specific tasks",
   "author": {
     "name": "Vladislav Karpman",
@@ -13,6 +13,7 @@
   "commands": [
     "./commands/improve-prompt.md",
     "./commands/build-prompt.md",
-    "./commands/think.md"
+    "./commands/think.md",
+    "./commands/team-up.md"
   ]
 }

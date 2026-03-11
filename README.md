@@ -10,6 +10,7 @@ A collection of reusable skills for Claude that enhance its capabilities for spe
 |-------|-------------|
 | [prompt-improver](./skills/prompt-improver/) | Build or improve prompts using the 6-component framework (Persona, Task, Steps, Context, Goal, Format) |
 | [think](./skills/think/) | Universal task entry point — orchestrates superpowers skills and adds OpenAI Codex CLI as an adversarial second opinion |
+| [team-up](./skills/team-up/) | Full lifecycle agent team orchestrator — refines tasks, designs teams with file ownership, coordinates parallel execution, and runs code review |
 
 ## Commands
 
@@ -18,6 +19,7 @@ A collection of reusable skills for Claude that enhance its capabilities for spe
 | `/improve-prompt` | Analyze and improve an existing prompt |
 | `/build-prompt` | Build a new prompt from scratch |
 | `/think` | Start any task with superpowers orchestration + Codex adversarial review |
+| `/team-up` | Orchestrate an agent team to implement a task with prompt refinement, team design, execution, and code review |
 
 ## Installation
 

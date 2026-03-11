@@ -1,27 +1,27 @@
 ---
 name: think
-description: Start working on any task with superpowers orchestration and Codex adversarial review
+description: Think through a hard problem with a Socratic thinking partner and optional Codex second opinion
 arguments:
   - name: task
-    description: Description of what to work on, or path to an existing plan/artifact to review
+    description: The problem, question, or decision you want to think through
     required: false
 ---
 
 # Think
 
-Use the think skill to orchestrate superpowers and add Codex CLI adversarial review.
+Use the think skill as a Socratic thinking partner for hard decisions.
 
 ## Input
 
-The task to work on: `$ARGUMENTS`
+The problem to think through: `$ARGUMENTS`
 
-If no input was provided, ask the user what they'd like to work on.
+If no input was provided, ask the user what they'd like to think through.
 
 ## Process
 
-1. Understand the task — detect if input is a file path or description
-2. Route to appropriate superpowers skills (brainstorming, writing-plans, systematic-debugging)
-3. Run the output through the Codex CLI review loop until APPROVED (max 5 rounds)
-4. Save the final artifact and suggest next steps
+1. Engage in Socratic dialogue — ask sharp questions, challenge assumptions, surface trade-offs
+2. If the user requests a second opinion, get an independent take from Codex
+3. When ready, summarize the decision, reasoning, and risks
+4. Suggest the logical next skill based on the decision
 
 Follow the full process defined in the think skill.
