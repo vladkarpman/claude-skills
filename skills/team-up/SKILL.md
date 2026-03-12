@@ -1,14 +1,37 @@
 ---
 name: team-up
 description: >
-  Full lifecycle agent team orchestrator. Trigger phrases: "team up", "create a team",
-  "parallelize this", "use a team", or /team-up command. Takes a task, refines the prompt,
-  designs team structure, creates the team, coordinates execution, and runs final code review.
+  Use when the user says "team up", "create a team", "parallelize this",
+  "use a team", or runs /team-up. Also use for complex tasks requiring
+  parallel agent coordination across multiple files or features.
 ---
 
 # Team Up
 
 Full lifecycle agent team orchestrator. Takes a rough task description and turns it into a coordinated team deployment: refine the prompt, design team structure with file ownership, create the team, coordinate parallel execution, and run a final code review.
+
+---
+
+## Iron Rule
+
+**This skill ALWAYS results in creating a team (`TeamCreate`) and spawning teammates (`Agent` tool).**
+
+You are the **lead** — you coordinate, you do NOT implement. If you catch yourself writing implementation code instead of spawning teammates, STOP.
+
+**Violating the letter of this rule is violating the spirit of this rule.**
+
+### Red Flags — STOP If You Catch Yourself Thinking:
+
+| Excuse | Reality |
+|--------|---------|
+| "This is simple enough to do myself" | The user asked for a team. Create one. |
+| "It's faster without teammates" | Speed isn't the goal — parallel execution is. |
+| "I'll just do the first part myself" | NO. Design the team, spawn teammates. |
+| "The task is too small for a team" | Ask the user — don't decide unilaterally. |
+| "Let me just explore first, then decide" | Exploration is Step 3. Team creation is Step 5. Keep going. |
+| "I got stuck in refinement, let me just code it" | Skip to Step 4 and design the team. |
+
+**All of these mean: Create the team. Spawn teammates. No exceptions.**
 
 ---
 
@@ -19,11 +42,12 @@ Full lifecycle agent team orchestrator. Takes a rough task description and turns
 Read the user's input from `$ARGUMENTS`.
 
 **If vague or single-sentence:**
-- Proceed to Step 2 for refinement
+- Proceed to Step 2 for refinement — but limit to 2-3 questions max, then move on
 
 **If already detailed (multi-paragraph with clear requirements):**
-- Ask: "This looks well-defined. Want me to refine it further, or skip straight to team design?"
-- If skip → proceed to Step 3
+- Skip straight to Step 3 (codebase analysis)
+
+**IMPORTANT:** Do NOT get stuck here. Steps 1-2 should take no more than 2-3 exchanges total. The goal is team creation, not perfect requirements.
 
 ### Step 2: Refine with 6-Component Framework
 
@@ -50,9 +74,11 @@ Apply the 6-component framework to strengthen the task description before team d
 
 Persona and Format are less critical for team tasks — skip them unless clearly relevant.
 
-**Ask ONE question at a time** for each missing/vague component. After each answer, update the assessment and ask the next.
+**Ask at most 2-3 focused questions** covering the most critical gaps. Do NOT ask one-at-a-time for every component — batch what you can and move on.
 
-**Synthesize** the improved task description once all critical gaps are filled. Show it to the user for confirmation.
+**Synthesize** the improved task description once critical gaps are filled. Show it to the user for confirmation.
+
+**IMPORTANT:** If the user says "just go" or seems impatient, skip remaining refinement and proceed to Step 3 immediately. Good enough is good enough — teammates can ask clarifying questions during execution.
 
 ### Step 3: Analyze Codebase
 
