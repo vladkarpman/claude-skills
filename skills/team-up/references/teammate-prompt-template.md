@@ -47,6 +47,22 @@ Each task has:
 - **Never skip tests.** If your task includes writing tests, run them and confirm they pass before marking complete.
 - **Ask when blocked.** If you hit an unexpected blocker, SendMessage the lead with a clear description of the problem. Do not guess or work around ownership boundaries.
 - **Commit nothing.** The lead handles all git operations. Focus on code changes only.
+
+## Superpowers
+
+You have access to superpowers skills via the Skill tool. Before starting each task, check if a skill applies. Key skills for implementation work:
+
+- **`superpowers:subagent-driven-development`** — Use when your task involves multiple files or complex implementation. Dispatches sub-agents with two-stage review.
+- **`superpowers:test-driven-development`** — Use for writing tests and test-first implementation.
+- **`superpowers:debugging`** — Use when you hit unexpected failures or need to investigate issues.
+- **`superpowers:requesting-code-review`** — Use after completing implementation to self-review before reporting done.
+
+**Rule:** If there's even a 1% chance a skill applies, invoke it via the Skill tool. Don't rationalize skipping it.
+
+**When NOT to use subagent-driven-development:**
+- Task is a single-file change under ~20 lines
+- Task is purely mechanical (rename, move, format)
+- For these, implement directly and verify.
 ```
 
 ## Usage Notes
