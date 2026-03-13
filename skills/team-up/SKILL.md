@@ -144,6 +144,14 @@ Use `TaskUpdate` with `owner` to assign each task to the appropriate teammate na
 
 **Confirm creation to the user** with a summary: team name, number of tasks, number of teammates.
 
+**5e. Verify effort configuration**
+
+Before spawning teammates, check that the session is configured for maximum performance. Inform the user of the current effort level:
+
+> **Pre-flight check:** Teammates inherit the session's effort level and will run on Opus. For best results, effort should be set to `max`. You can set it via `/model` (arrow keys), `claude --effort max`, or `CLAUDE_CODE_EFFORT_LEVEL=max`.
+
+If effort is not `max`, recommend the user adjust it and offer to wait. If already `max`, proceed directly to Step 6.
+
 ### Step 6: Spawn Teammates
 
 Spawn each teammate using the Agent tool.
@@ -162,6 +170,7 @@ Spawn each teammate using the Agent tool.
    - `team_name`: team name from Step 5a
    - `prompt`: the filled-in template
    - `mode`: "auto"
+   - `model`: "opus"
 
 **Spawn all teammates in parallel** — include all Agent tool calls in a single message.
 
